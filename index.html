@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soproni Fa-Platform & Tudástár</title>
+    <style>
+        :root {
+            --bg-color: #1a1a1a;
+            --card-bg: #2d2d2d;
+            --accent-color: #4caf50;
+            --accent-hover: #45a049;
+            --text-color: #ffffff;
+            --text-muted: #aaaaaa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: var(--card-bg);
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        h1 { margin: 0; font-size: 1.5rem; color: var(--accent-color); }
+        h2 { color: var(--accent-color); border-bottom: 2px solid var(--card-bg); padding-bottom: 5px; }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+            flex: 1;
+        }
+
+        .btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            margin: 5px;
+        }
+        .btn:hover { background-color: var(--accent-hover); }
+        .btn-secondary { background-color: #555; }
+        .btn-secondary:hover { background-color: #666; }
+
+        .main-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .menu-card {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #3d3d3d;
+        }
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(76, 175, 80, 0.2);
+        }
+        .menu-card h2 { border: none; margin-top: 0; }
+
+        .page { display: none; }
+        .active-page { display: block; }
+
+        .map-container {
+            position: relative;
+            padding-bottom: 75%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+        .map-container iframe {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            border: none;
+        }
+
+        .tudastar-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        @media(min-width: 600px) {
+            .tudastar-layout { flex-direction: row; }
+            .tudastar-nav { width: 30%; }
+            .tudastar-content { width: 70%; }
+        }
+
+        .sub-menu-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            background: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid #3d3d3d;
+            padding: 10px 15px;
+            margin-bottom: 5px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .sub-menu-btn:hover, .sub-menu-btn.active {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        .calc-card {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--text-muted);
+        }
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #555;
+            background-color: #1a1a1a;
+            color: white;
+            box-sizing: border-box;
+        }
+        .result {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #1b3a1b;
+            border-left: 5px solid var(--accent-color);
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: 1px solid var(--accent-color);
+            background-color: #1a1a1a;
+            color: white;
+            box-sizing: border-box;
+        }
+        
+        /* Fafaj lista és részletes adatlap stílusok */
+        .fafaj-item {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid #555;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .fafaj-item:hover {
+            background: #3a3a3a;
+        }
+        .fafaj-item h3 { margin: 0 0 5px 0; color: var(--accent-color); }
+        .fafaj-latin { font-style: italic; color: var(--text-muted); font-size: 0.9rem; }
+
+        .adatlap-spec {
+            margin-top: 15px;
+            background-color: #222;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #444;
+        }
+        .adatlap-blokk {
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .adatlap-blokk strong {
+            color: var(--accent-color);
+            display: inline-block;
+            margin-bottom: 2px;
+        }
+        .adatlap-al-lista {
+            margin: 5px 0 5px 20px;
+            padding: 0;
+            list-style-type: square;
+        }
+
+        .back-bar { margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 onclick="showPage('home')" style="cursor:pointer;">Soproni Fa-Platform</h1>
+    </header>
+
+    <div class="container">
+
+        <div id="home" class="page active-page">
+            <p style="text-align: center; color: var(--text-muted);">Üdvözöljük a soproni botanikus kert közösségi térképén és faipari tudástárában!</p>
+            <div class="main-menu">
+                <div class="menu-card" onclick="showPage('terkep')">
+                    <h2>🌳 Interaktív Térkép</h2>
+                    <p>Böngészd a botanikus kert fáit élőben, vagy küldj be új adatokat a terepről.</p>
+                </div>
+                <div class="menu-card" onclick="showPage('tudastar')">
+                    <h2>📖 Faipari Tudástár</h2>
+                    <p>Segédlet egyetemi és középiskolai tanulmányokhoz. Elmélet és interaktív kalkulátorok.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="terkep" class="page">
+            <div class="back-bar">
+                <button class="btn btn-secondary" onclick="showPage('home')">⬅ Vissza a főmenübe</button>
+            </div>
+            <h2>Botanikus Kert Térkép</h2>
+            <div class="map-container">
+                <iframe src="http://u.osmfr.org/m/1365126/"></iframe>
+            </div>
+            <div style="margin-top: 20px; text-align: center;">
+                <a href="#" class="btn" target="_blank">➕ Új fa beküldése (Űrlap)</a>
+                <a href="#" class="btn btn-secondary" target="_blank">🔧 Korrekció / Hibajelentés</a>
+            </div>
+        </div>
+
+        <div id="tudastar" class="page">
+            <div class="back-bar">
+                <button class="btn btn-secondary" onclick="showPage('home')">⬅ Vissza a főmenübe</button>
+            </div>
+            
+            <div class="tudastar-layout">
+                <div class="tudastar-nav">
+                    <button id="btn-elmelet" class="sub-menu-btn active" onclick="showTudastarContent('elmelet')">📚 Elméleti Anyagok</button>
+                    <button id="btn-fafajok" class="sub-menu-btn" onclick="showTudastarContent('fafajok')">🔍 Fafaj Katalógus</button>
+                    <button id="btn-kalkulatorok" class="sub-menu-btn" onclick="showTudastarContent('kalkulatorok')">🧮 Kalkulátorok</button>
+                </div>
+
+                <div class="tudastar-content">
+                    
+                    <div id="tuda-elmelet" class="tudastar-subpage" style="display: block;">
+                        <h2>Faanyag felépítése</h2>
+                        <p>A fa makroszkópos szerkezetének legfontosabb elemei a **szíjács** (a fatörzs külső, élő, nedvességet szállító része) és a **geszt** (a belső, elhalt, sötétebb színű, statikai tartást adó rész).</p>
+                        <p><strong>Likacsok szerinti csoportosítás:</strong></p>
+                        <ul>
+                            <li><strong>Gyűrűs likacsú fák:</strong> Az korai pászta edényei fonalas gyűrűt alkotnak (pl. Tölgy, Kőris).</li>
+                            <li><strong>Edényszórt likacsú fák:</strong> Az edények egyenletesen oszlanak el az egész évgyűrűben (pl. Bükk, Juhar).</li>
+                        </ul>
+
+                        <h2>Fahibák</h2>
+                        <p>A faanyag növekedése során fellépő leggyakoribb fahibák:</p>
+                        <ul>
+                            <li><strong>Göcsösség:</strong> A törzsbe ágyazódott ághelyek, melyek rontják a szilárdságot.</li>
+                            <li><strong>Csavarodottság:</strong> A rostok a törzs tengelye körül csavarvonalban futnak.</li>
+                        </ul>
+                    </div>
+
+                    <div id="tuda-fafajok" class="tudastar-subpage" style="display: none;">
+                        <h2>Fafajok keresője</h2>
+                        <input type="text" id="fafaj-kereso" class="search-box" onkeyup="szurFafajok()" placeholder="Gépelj ide a kereséshez (pl. tiszafa, tölgy)...">
+                        
+                        <div id="fafaj-lista-container">
+                            <div id="fafaj-lista"></div>
+                        </div>
+
+                        <div id="fafaj-adatlap-nezetház" style="display: none;">
+                            <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.9rem;" onclick="visszaAListahoz()">⬅ Vissza a listához</button>
+                            <div id="adatlap-tartalom"></div>
+                        </div>
+                    </div>
+
+                    <div id="tuda-kalkulatorok" class="tudastar-subpage" style="display: none;">
+                        
+                        <div class="calc-card" style="background-color: #222; border: 1px solid #444;">
+                            <div class="input-group" style="margin-bottom: 0; display: flex; align-items: center; gap: 10px;">
+                                <label style="margin-bottom: 0; white-space: nowrap;">⚙️ Eredmények kerekítése:</label>
+                                <select id="tizedes-valaszto" onchange="frissitMindenSzamitast()" style="padding: 5px;">
+                                    <option value="1">1 tizedesjegy</option>
+                                    <option value="2">2 tizedesjegy</option>
+                                    <option value="3" selected>3 tizedesjegy</option>
+                                    <option value="4">4 tizedesjegy</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="calc-card">
+                            <h3>💧 Nedvességtartalom Számítás</h3>
+                            <div class="input-group">
+                                <label>Nedves fa tömege (m<sub>u</sub>) [g]:</label>
+                                <input type="text" id="mu" value="120.45">
+                            </div>
+                            <div class="input-group">
+                                <label>Abszolút száraz fa tömege (m<sub>0</sub>) [g]:</label>
+                                <input type="text" id="m0" value="100.12">
+                            </div>
+                            <button class="btn" onclick="szamolNedvesség()">Kiszámol</button>
+                            <div id="nedv-eredmeny" class="result">Nettó: - | Bruttó: -</div>
+                        </div>
+
+                        <div class="calc-card">
+                            <h3>📐 Sűrűség Számítás</h3>
+                            <div class="input-group">
+                                <label>Próbatest tömege (m) [g]:</label>
+                                <input type="text" id="suru-m" value="45.231">
+                            </div>
+                            <div class="input-group">
+                                <label>Próbatest térfogata (V) [cm³]:</label>
+                                <input type="text" id="suru-v" value="60.11">
+                            </div>
+                            <button class="btn" onclick="szamolSuruseg()">Kiszámol</button>
+                            <div id="suru-eredmeny" class="result">Sűrűség (ρ): -</div>
+                        </div>
+
+                        <div class="calc-card">
+                            <h3>🪵 Hajlítószilárdság (σ<sub>h</sub>)</h3>
+                            <div class="input-group">
+                                <label>Törőerő (F) [N]:</label>
+                                <input type="text" id="hajl-f" value="1500">
+                            </div>
+                            <div class="input-group">
+                                <label>Támaszköz (L) [mm]:</label>
+                                <input type="text" id="hajl-l" value="240">
+                            </div>
+                            <div class="input-group">
+                                <label>Szélesség (b) [mm]:</label>
+                                <input type="text" id="hajl-b" value="20.1">
+                            </div>
+                            <div class="input-group">
+                                <label>Magasság (h) [mm]:</label>
+                                <input type="text" id="hajl-h" value="19.8">
+                            </div>
+                            <button class="btn" onclick="szamolHajlitas()">Kiszámol</button>
+                            <div id="hajl-eredmeny" class="result">Hajlítószilárdság (σ<sub>h</sub>): -</div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Bővített fafaj adatbázis a Te Tiszafa leírásoddal!
+        const fafajokAdatbazis = [
+            { 
+                id: 0,
+                nev: "Tiszafa", 
+                latin: "Taxus baccata", 
+                tipus: "Örökzöld", 
+                leiras: "A tiszafa (Taxus baccata) a nyitvatermők törzsén belül, a szabadmagvas fenyők (toboz nélküli fenyők) (Taxospida) osztályába tartozik, azaz rendszertanilag teljesen különáll a mindenki számára jól ismert tobozos nyitvatermőktől (Coniferospida). A tiszafafélék családjába mindösszesen 20 faj tartozik, és az északi féltekén elterjedt Taxus nemzetségnek 9 faja ismert. Ezekből Európában a közönséges (európai) tiszafa az őshonos. Hasonló szép faanyagot ad Ázsiában a kínai tiszafa (T. chinensis) and a japán tiszafa (T. cuspidata), melyek CITES II. szabályozás alá esnek, Észak-Amerikában pedig az oregoni tiszafa (T. brevifolia). A tiszafa atlanti-mediterrán jellegű flóra elem. Nem gyakori faj. A tiszafás erdők elszigetelt foltokat alkotnak Skandinávia déli részétől egész Európában. Előfordul Észak-Afrikában, Kis- és Nyugat-Ázsiában. Szereti az üde, nedves, laza talajú termőhelyeket, gyakran jelenik meg együtt a bükkel. Árnyéktűrő és jól sarjad. Mesterséges telepítése is eredményes. Hazánkban a Bakonyban, Szentgál mellett és a Bükkben figyelhető meg természetes előfordulása.",
+                erdekesseg: "A tiszafa minden része mérgező (kivéve a piros édeskés magköpenyt). A taxin tartalmú tűlevél, mag és kéreg fogyasztása az ember és állatok esetében is súlyos mérgezést okozhat: a halálos dózis embernél 1 g/kg testtömeg, lónál 2 g/kg, marhánál 10 g/kg, üregi nyúlnál 20 g/kg. Játszóterekre, óvodák, iskolák kertjébe nem javasolható a tiszafa telepítése. A tiszafa megmunkáláskor a szálkájának bökése a fában lévő méreganyag miatt bőrgyulladást okoz, a fapor pedig más faanyaghoz képest jobban irritálja a nyálkahártyát, ezért védőfelszerelés használata ajánlott.",
+                elofa: "Törzse korán elágazik, nagy méreteket csak ritkán ér el. Nagyon lassan nő, az évgyűrű szélessége 1 mm körüli, ritkán éri el az 0,5-0,6 m átmérőt. A tiszafa hajlamos a korai elágazásra, bokrosodásra. A tűlevelek 1-3 cm hosszúak, 2-5 mm szélesek, laposak. Kétlaki növény. Magköpenyes magjának külső burka kárminpiros. A tiszafa kérge a fiatal hajtásokon és ágakon zöld, később barnászöld. Idősebb korban a kéreg világos rozsdabarna, szürke csíkokkal, foltokkal, jellegzetes hosszanti rostos szalagokban válik le.",
+                makro: "A tiszafa szíjácsa rendkívül keskeny, világossárgás, a geszt sötét vörösesbarna. Az évgyűrűk élesen elhatároltak, keskenyek, hullámosak; a sötétebb késői pászta jól elválik a koraitól. A keskeny bélsugarak a bütümetszeten nem láthatók, de a finom bélsugártükrök a sugárirányú hosszmetszeten jól kivehetők. Nem tartalmaz gyantajáratokat. Rendkívül kellemes, esztétikus megjelenésű.",
+                mikro: "Nyitvatermőként csak tracheidák alkotják a fatestet (nincsenek tracheák, farostok), melyek szabályos sugárirányú sorokba rendezettek, spirális falvastagodással rendelkeznek, és jellemzően rövidebbek a tobozos nyitvatermők tracheidáihoz kp-est. A bélsugarak homogén szerkezetűek. Egy sejtsor szélesek és 10-25 sejtsor magasak.",
+                fahiba: "A tiszafa egyenes hengeres törzset csak igen ritkán növeszt. Korán elágazik és a törzskeresztmetszete szabálytalan, bordás. Abiotikus károsítói a szélsőséges hőmérsékleti hatások, azaz sem az erősen hideg teleket, sem a száraz, meleg nyarakat nem bírja. Az élő tiszafa rendkívül ellenálló a légszennyeződésekkel (pl. SO₂) szemben. A tiszafából készült kültéri tárgyak jól ellenállnak az időjárási kitettségeknek.",
+                suruseg: "640-670-810 kg/m³",
+                zsugor: { rost: "0,4", hur: "5,3", sugar: "3,7", terf: "8,4-9,2" },
+                mech: { nyomo: "58", hajli: "92", kem_butu: "65-71", kem_oldal: "31", modulusz: "12000-15000" },
+                kemia: "A taxol (az oregoni tiszafa kéreg kivonata) felfedezése óta sikeresen fejlesztettek gyógyszereket a taxin alapú alkaloidokból. Sejtosztódást gátló hatása miatt a méh-, mell-, petefészek-, prosztatarák gyógyításában fontos.",
+                megmunk: "Nagy keménysége és szabálytalan szöveti szerkezete miatt a megmunkálása energiaigényes. Nehezen hasad, de gyalulásnál szép felületet ad. Jól esztergályozható, faragható. Előzetes gőzölés után fájából esetenként furnért is hasítanak. Könnyen és jól szárítható, nem hajlamos repedésre, vetemedésre. A ragasztása is problémamentes. Jól pácolható (sötét pácok esetén az ébenfára emlékeztet). Felületkezelésnél fényes és matt felületek egyaránt jól kialakíthatók.",
+                felhaszn: "A tiszafa a világ legértékesebb fái közé tartozik. A belőle készített tárgyak közül az egyik legrégibb lelet az i.e. 1400-ból származó szobrocska Teje egyiptomi király nő arcmásával (berlini múzeum). Tiszafából készített íjakat az i.e. 3000-1800 évekből őriznek a zürichi múzeumban. Az ókorból sok tiszafából készült házieszközt is felleltek: kanalakat, fésüket, vödröket, hordókat stb. Az építészetben küszöbök és oszlopok készültek tiszafából. A lõpor elterjedéséig (XVII. század) a tiszafa volt az íjkészítés legfontosabb anyaga. Ma az igen szerény mennyiségben rendelkezesre álló tiszafát elsősorban a faszobrászatban és dísztárgyak készítésére használják faragásra, esztergályozásra."
+            },
+            { id: 1, nev: "Kocsányos tölgy", latin: "Quercus robur", tipus: "Lombos - Keményfa", leiras: "Minta adat..." },
+            { id: 2, nev: "Bükk", latin: "Fagus sylvatica", tipus: "Lombos - Keményfa", leiras: "Minta adat..." }
+        ];
+
+        window.onload = function() {
+            megjelenitFafajok(fafajokAdatbazis);
+        };
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active-page');
+            });
+            document.getElementById(pageId).classList.add('active-page');
+        }
+
+        function showTudastarContent(subPageId) {
+            document.querySelectorAll('.sub-menu-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById('btn-' + subPageId).classList.add('active');
+
+            document.querySelectorAll('.tudastar-subpage').forEach(page => {
+                page.style.display = 'none';
+            });
+            document.getElementById('tuda-' + subPageId).style.display = 'block';
+            
+            if(subPageId === 'fafajok') {
+                visszaAListahoz();
+            }
+        }
+
+        function megjelenitFafajok(lista) {
+            const listaDiv = document.getElementById('fafaj-lista');
+            listaDiv.innerHTML = "";
+            
+            if(lista.length === 0) {
+                listaDiv.innerHTML = "<p style='color:var(--text-muted);'>Nincs a keresésnek megfelelő fafaj.</p>";
+                return;
+            }
+
+            lista.forEach(fa => {
+                listaDiv.innerHTML += `
+                    <div class="fafaj-item" onclick="megnyitAdatlap(${fa.id})">
+                        <h3>${fa.nev} <span class="fafaj-latin">(${fa.latin})</span></h3>
+                        <div style="font-size:0.8rem; color:var(--accent-color);">${fa.tipus}</div>
+                    </div>
+                `;
+            });
+        }
+
+        function szurFafajok() {
+            let keresoSzo = document.getElementById('fafaj-kereso').value.toLowerCase();
+            let szurtLista = fafajokAdatbazis.filter(fa => 
+                fa.nev.toLowerCase().includes(keresoSzo) || 
+                fa.latin.toLowerCase().includes(keresoSzo)
+            );
+            megjelenitFafajok(szurtLista);
+        }
+
+        // ================= ADATLAP MEGJELENÍTÉSE FÉLKÖVÉR CÍMSZAVAKKAL =================
+        function megnyitAdatlap(id) {
+            const fa = fafajokAdatbazis.find(f => f.id === id);
+            if(!fa || id !== 0) { 
+                alert("Ehhez a minta fafajhoz még nincs feltöltve a teljes adatlap."); 
+                return; 
+            }
+
+            document.getElementById('fafaj-lista-container').style.display = 'none';
+            document.getElementById('fafaj-kereso').style.display = 'none';
+            document.getElementById('fafaj-adatlap-nezetház').style.display = 'block';
+
+            const tartalom = document.getElementById('adatlap-tartalom');
+            tartalom.innerHTML = `
+                <h2 style="margin-top:15px;">${fa.nev}</h2>
+                <div class="adatlap-spec">
+                    <div class="adatlap-blokk"><strong>Latin név:</strong> <span>${fa.latin}</span></div>
+                    <div class="adatlap-blokk"><strong>Típus:</strong> <span>${fa.tipus}</span></div>
+                    <div class="adatlap-blokk"><strong>Leírás:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${fa.leiras}</p></div>
+                    <div class="adatlap-blokk"><strong>Érdekesség:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${fa.erdekesseg}</p></div>
+                    <div class="adatlap-blokk"><strong>Élőfa jellemzői:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${fa.elofa}</p></div>
+                    <div class="adatlap-blokk"><strong>Makroszkópikus jellemzők:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${fa.makro}</p></div>
+                    <div class="adatlap-blokk"><strong>Mikroszkópikus jellemzők:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${fa.mikro}</p></div>
+                    <div class="adatlap-blokk"><strong>Fahibák, fakárosodások, tartósság:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${fa.fahiba}</p></div>
+                    <div class="adatlap-blokk"><strong>Sűrűség:</strong> <span>${fa.suruseg}</span></div>
+                    
+                    <div class="adatlap-blokk">
+                        <strong>Zsugorodás (%):</strong>
+                        <ul class="adatlap-al-lista">
+                            <li>Rostirányú: ${fa.zsugor.rost}</li>
+                            <li>Húrirányú: ${fa.zsugor.hur}</li>
+                            <li>Sugárirányú: ${fa.zsugor.sugar}</li>
+                            <li>Térfogati: ${fa.zsugor.terf}</li>
+                        </ul>
+                    </div>
+
+                    <div class="adatlap-blokk">
+                        <strong>Mechanikai tulajdonságok:</strong>
+                        <ul class="adatlap-al-lista">
+                            <li>Nyomószilárdság (MPa): ${fa.mech.nyomo}</li>
+                            <li>Hajlítószilárdság (MPa): ${fa.mech.hajli}</li>
+                            <li>Keménység (Brinell) (MPa) - bütü: ${fa.mech.kem_butu}</li>
+                            <li>Keménység (Brinell) (MPa) - oldal: ${fa.mech.kem_oldal}</li>
+                            <li>Hajlító rugalmassági modulusz (MPa): ${fa.mech.modulusz}</li>
+                        </ul>
+                    </div>
+
+                    <div class="adatlap-blokk"><strong>Kémiai tulajdonságok:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${fa.kemia}</p></div>
+                    <div class="adatlap-blokk"><strong>Megmunkálási sajátosságok:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${fa.megmunk}</p></div>
+                    <div class="adatlap-blokk"><strong>Felhasználás:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${fa.felhaszn}</p></div>
+                </div>
+            `;
+        }
+
+        function visszaAListahoz() {
+            document.getElementById('fafaj-lista-container').style.display = 'block';
+            document.getElementById('fafaj-kereso').style.display = 'block';
+            document.getElementById('fafaj-adatlap-nezetház').style.display = 'none';
+        }
+
+        // --- KALKULÁTOR SEGÉDFÜGGVÉNYEK ---
+        function szamotBeolvas(id) {
+            let ertek = document.getElementById(id).value;
+            ertek = ertek.replace(',', '.'); 
+            return parseFloat(ertek);
+        }
+
+        function getTizedesek() {
+            return parseInt(document.getElementById('tizedes-valaszto').value);
+        }
+
+        function frissitMindenSzamitast() {
+            szamolNedvesség(); szamolSuruseg(); szamolHajlitas();
+        }
+
+        function szamolNedvesség() {
+            let mu = szamotBeolvas('mu'); let m0 = szamotBeolvas('m0'); let t = getTizedesek();
+            if (isNaN(m0) || isNaN(mu) || m0 <= 0 || mu < m0) return;
+            let netto = ((mu - m0) / m0) * 100; let brutto = ((mu - m0) / mu) * 100;
+            document.getElementById('nedv-eredmeny').innerHTML = `Nettó nedvességtartalom (u): <strong>${netto.toFixed(t)}%</strong><br>Bruttó nedvességtartalom (w): <strong>${brutto.toFixed(t)}%</strong>`;
+        }
+
+        function szamolSuruseg() {
+            let m = szamotBeolvas('suru-m'); let v = szamotBeolvas('suru-v'); let t = getTizedesek();
+            if (isNaN(m) || isNaN(v) || v <= 0 || m <= 0) return;
+            let rho = m / v; let rhoKg = rho * 1000;
+            document.getElementById('suru-eredmeny').innerHTML = `Sűrűség (ρ): <strong>${rho.toFixed(t)} g/cm³</strong> (${rhoKg.toFixed(0)} kg/m³)`;
+        }
+
+        function szamolHajlitas() {
+            let F = szamotBeolvas('hajl-f'); let L = szamotBeolvas('hajl-l'); let b = szamotBeolvas('hajl-b'); let h = szamotBeolvas('hajl-h'); let t = getTizedesek();
+            if (isNaN(F) || isNaN(L) || isNaN(b) || isNaN(h) || b <= 0 || h <= 0 || L <= 0 || F <= 0) return;
+            let sigmaH = (3 * F * L) / (2 * b * Math.pow(h, 2));
+            document.getElementById('hajl-eredmeny').innerHTML = `Hajlítószilárdság (σ<sub>h</sub>): <strong>${sigmaH.toFixed(t)} MPa</strong>`;
+        }
+    </script>
+</body>
+</html>
