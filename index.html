@@ -483,12 +483,10 @@
         }
 
         // ================= ADATLAP MEGJELENÍTÉSE FÉLKÖVÉR CÍMSZAVAKKAL =================
-        function megnyitAdatlap(id) {
-            const fa = fafajokAdatbazis.find(f => f.id === id);
-            if(!fa || id !== 0) { 
-                alert("Ehhez a minta fafajhoz még nincs feltöltve a teljes adatlap."); 
-                return; 
-            }
+        if(!fa) { 
+        alert("A keresett fafaj nem található."); 
+        return; 
+    }
 
             document.getElementById('fafaj-lista-container').style.display = 'none';
             document.getElementById('fafaj-kereso').style.display = 'none';
