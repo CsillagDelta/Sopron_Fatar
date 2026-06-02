@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soproni Fa-Platform & Tudástár</title>
+    <title>Soproni Fa- és Tudástár</title>
     <style>
         :root {
             --bg-color: #1a1a1a;
@@ -214,21 +214,21 @@
 <body>
 
     <header>
-        <h1 onclick="showPage('home')" style="cursor:pointer;">Soproni Fa-Platform</h1>
+        <h1 onclick="showPage('home')" style="cursor:pointer;">Soproni Fa- és Tudástár</h1>
     </header>
 
     <div class="container">
 
         <div id="home" class="page active-page">
-            <p style="text-align: center; color: var(--text-muted);">Üdvözöljük a soproni botanikus kert közösségi térképén és faipari tudástárában!</p>
+            <p style="text-align: center; color: var(--text-muted);">Üdvözöljük a Sopron Fatár országos közösségi térkép és faipari tudástárában!</p>
             <div class="main-menu">
                 <div class="menu-card" onclick="showPage('terkep')">
-                    <h2>🌳 Interaktív Térkép</h2>
-                    <p>Böngészd a botanikus kert fáit élőben, vagy küldj be új adatokat a terepről.</p>
+                    <h2>🌳 Soproni Fatár</h2>
+                    <p>Böngészd a környékbeli fákat élőben, vagy küldj be új adatokat a környezetedből (Akár az utcádból).</p>
                 </div>
                 <div class="menu-card" onclick="showPage('tudastar')">
-                    <h2>📖 Faipari Tudástár</h2>
-                    <p>Segédlet egyetemi és középiskolai tanulmányokhoz. Elmélet és interaktív kalkulátorok.</p>
+                    <h2>📖 Tudástár</h2>
+                    <p>Ez itt a minden tudás tára. Segédlet egyetemi és középiskolai tanulmányokhoz. Elmélet és interaktív kalkulátorok.</p>
                 </div>
             </div>
         </div>
@@ -237,7 +237,7 @@
             <div class="back-bar">
                 <button class="btn btn-secondary" onclick="showPage('home')">⬅ Vissza a főmenübe</button>
             </div>
-            <h2>Botanikus Kert Térkép</h2>
+            <h2>Sopron Fatár</h2>
             <div class="map-container">
                 <iframe src="https://u.osmfr.org/m/1365126/"></iframe>
             </div>
@@ -245,7 +245,7 @@
             <div style="margin-top: 20px; text-align: center;">
                 <a href="https://u.osmfr.org/m/1365126/" class="btn btn-secondary" style="background-color: #0288d1; display: block; margin: 0 auto 15px auto; max-width: 300px;" target="_blank">🌐 Térkép megnyitása teljes képernyőn</a>
                 
-                <a href="IDE_MÁSOLD_VISSZA_A_GOOGLE_ŰRLAPOD_LINKJÉT" class="btn" target="_blank">➕ Új fa beküldése (Űrlap)</a>
+                <a href="https://forms.gle/jDkp6YkTc3htpUHEA" class="btn" target="_blank">➕ Új fa beküldése (Űrlap)</a>
                 <a href="#" class="btn btn-secondary" target="_blank">🔧 Korrekció / Hibajelentés</a>
             </div>
         </div>
@@ -389,8 +389,42 @@
                 megmunk: "Nagy keménysége és szabálytalan szöveti szerkezete miatt a megmunkálása energiaigényes. Nehezen hasad, de gyalulásnál szép felületet ad. Jól esztergályozható, faragható. Előzetes gőzölés után fájából esetenként furnért is hasítanak. Könnyen és jól szárítható, nem hajlamos repedésre, vetemedésre. A ragasztása is problémamentes. Jól pácolható (sötét pácok esetén az ébenfára emlékeztet). Felületkezelésnél fényes és matt felületek egyaránt jól kialakíthatók.",
                 felhaszn: "A tiszafa a világ legértékesebb fái közé tartozik. A belőle készített tárgyak közül az egyik legrégibb lelet az i.e. 1400-ból származó szobrocska Teje egyiptomi király nő arcmásával (berlini múzeum). Tiszafából készített íjakat az i.e. 3000-1800 évekből őriznek a zürichi múzeumban. Az ókorból sok tiszafából készült házieszközt is felleltek: kanalakat, fésüket, vödröket, hordókat stb. Az építészetben küszöbök és oszlopok készültek tiszafából. A lõpor elterjedéséig (XVII. század) a tiszafa volt az íjkészítés legfontosabb anyaga. Ma az igen szerény mennyiségben rendelkezesre álló tiszafát elsősorban a faszobrászatban és dísztárgyak készítésére használják faragásra, esztergályozásra."
             },
-            { id: 1, nev: "Kocsányos tölgy", latin: "Quercus robur", tipus: "Lombos - Keményfa", leiras: "Minta adat..." },
-            { id: 2, nev: "Bükk", latin: "Fagus sylvatica", tipus: "Lombos - Keményfa", leiras: "Minta adat..." }
+            { 
+                id: 1,
+                nev: "Kocsányos tölgy", 
+                latin: "Quercus robur", 
+                tipus: "Lombos - Keményfa", 
+                leiras: "A kocsányos tölgy Európa nagy részén őshonos...",
+                erdekesseg: "A tölgyfa makkja fontos vadeleség, kérge cserzőanyagot tartalmaz...",
+                elofa: "Hatalmas termetű, matuzsálemi kort megérő fa, mélyen barázdált kéreggel...",
+                makro: "Gyűrűs likacsú fafaj. Gesztje sárgásbarna, szíjácsa keskeny, világos...",
+                mikro: "Széles edények a korai pásztában, vastag falú libriform rostok...",
+                fahiba: "Fülledésre nem hajlamos, de fagyrepedések kialakulhatnak rajta...",
+                suruseg: "360-400-480 kg/m³",
+                zsugor: { rost: "0.3", hur: "6.2", sugar: "4.1", terf: "10" },
+                mech: { nyomo: "41.9", hajli: "84.8", kem_oldal"(Janka)": "2620", modulusz: "11350" },
+                kemia: "Magas tannin (csersav) tartalma védi a gombáktól...",
+                megmunk: "Keménysége ellenére jól megmunkálható, gőzölve jól hajlítható...",
+                felhaszn: "Hordógyártás (borok, whiskyk érlelése), parketta, bútoripar, vasúti talpfák..."
+            },
+            { 
+                id: 2,
+                nev: "Bükk", 
+                latin: "Fagus sylvatica", 
+                tipus: "Lombos", 
+                leiras: "A bükk nemzetségnek mintegy 13 faja az északi mérsékelt égövben őshonos. Európában kiemelkedően fontos szerepe van az egyszerűen bükknek nevezett közönséges bükknek (Fagus sylvatica). Délkelet-Európában, a Kaukázusban, Kis-Ázsiában található a keleti bükk (F. orientalis), amely valamivel melegebb klímát igényel, mint a közönséges bükk. Észak-Amerikában elterjedt az amerikai bükk (F. grandifolia), Japánban és a Távol-Keleten a japán bükk (F. crenata). A különböző bükk fajok fája között jelentős különbség nincs.",
+                erdekesseg: "Az egészséges (gombafertőzés nélküli) barna álgesztes bükköt a gyakorlatban 'vörösbükk'-nek is nevezik. Az álgeszt határa nem követi az évgyűrű vonalát, tehát szabálytalan. Az ún. szürke vagy csillagos álgeszt már gombával fertőzött, korhadó faanyag, iparilag már nem hasznosítható. A bükk egészséges álgesztjeinek kialakulása fiziológiai okokra (pl. öregedés, vízellátási zavarok), vagy mechanikai sérülésekre vezethető vissza. Az ilyen fa keményebb és tartósabb, de jobban reped, nem telíthető és nehezebben munkálható meg. Az álgesztesedés a színbeli eltérések miatt igen jelentős esztétikai hiba is lehet a bútor-, parketta- és rétegeltlemez-gyártásban, pedig az egészséges álgeszttel rendelkező fa ezeken a területeken felhasználható. Nyugat-Európában az álgesztes bükknek a bútoriparban és beltéri építkezésben való elfogadottságára irányult törekvések eredményesek.",
+                elofa: "Zárt állásban egyenes, hengeres törzset fejleszt. A fák magassága 35-40 m-t is elérhet, az ágtiszta törzshossz pedig 15-20 m. Véghasználati korban (100-120 év) a mellmagassági átmérő 0,4-0,7 m. Idősebb korban (200-300 év) elérheti az 1,5-1,8 m-t is. A világos, hamuszürke kéreg viszonylag vékony (1-2 cm) és csak igen ritkán repedezik, általában sima marad.",
+                makro: "Fája nagyon aromatikus, kellemes illatával tűnik fel. Szijácsa keskeny, sárgás színű, gesztje vörösesbarna. A fatest homogén, keskeny, nagyon keskeny évgyűrűi vannak, melyekben a késői pászta egyenletesen vékony, rajzolara finom, gyakran nem kivehető. Gyantajárat gyakori, főként a késői pásztában, vagy annak közelében található. Gyakoriak a kisebb méretű, benőtt göcsök, melyek sötétebb színűek.",
+                mikro: "A fatestet lényegében csak tracheidák alkotják, melyek szabályos, radiális sorokat képeznek, szögletesek. A fenyőkre jellemzően a késői pásztában lévő tracheidák vastagabb falúak, a koraié vékonyabbak, az átmenet fokozatos. A késői pászta keskeny. A faparenchima alig található benne. A bélsugarak egy sejtsor szélesek, a gyantajárat körül kiszélesednek, heterogén felépítésűek, 5-15 sejtsor magasak. A fajra jellemző, hogy a bélsugártracheidák fala vékony és sima, a kereszteződési mezőkben jól láthatóak a Pinus nemzetségre jellemző ablakos gödörkék. A gyantajáratok a késői pásztában vagy annak közelében vannak, az epitélsejteknek vékony fala van.",
+                fahiba: "Kevésbé tartós fafaj, gesztjének természetes ellenálló képessége a gombákkal szemben közepes, szíjácsát a rovarok gyorsan károsítják.",
+                suruseg: "650-690-750 kg/m³",
+                zsugor: { rost: "0.3", hur: "6.2", sugar: "4.1", terf: "10" },
+                mech: { nyomo: "41.9", hajli: "84.8", kem_oldal"(Janka)": "2620", modulusz: "11350" },
+                kemia: "A hamu 15-20%o-ben K₂O-t tartalmaz, mely alapján a bükk különösen alkalmas volt a hamuzsír (K₂CO₃) kinye-résére. Pirolízise során olyan hasznos melléktermékek is képződnek, mint a metilalkohol, az ecetsav és a fakátrány. A bükk hemicellulózaiból (pentozánok) előnyösen gyártható a furfurol is. A bükk enyhén savas, pH: 5,1-5,4.",
+                megmunk: "Nehézségek nélkül dolgozható fel a különböző mechanikai megmunkálási technológiákkal, jól fűrészelhető, marható és esztergályozható. A fűrészáru szárításakor figyelembe kell venni a bükk erős zsugorodását (beszáradási túlméretek, vetemedés) és széles bélsugarait (repedési hajlam). A bükk hátrányos tulajdonságainak (erős zsugorodás, tarkaság) mérsékelésére elterjedten alkalmazzák a fűrészáru vagy a rönk gőzölését. A bükk rönkök gőzölése elsősorban a mechanikai megmunkálást (hámozás, furnér késelés) készíti elő. A bükk gőzölését felhasználják a tömörfa elemek hajlíthatóságának a növelésére is. Kiválóan hámozható, késelhető. A gőzöléssel előkészített bükk kiválóan hajlítható. A bükk furnér és tömörfa a faiparban alkalmazott ragasztóanyagokkal jól ragasztható. A bükk jól pácolható, lakkozható, a pácolás segítségével biztosítható az álgesztes anyag színhomogenizálása is. A bükk jól szegezhető, csavarozható, de a repedések megelőzésére célszerű előfúrást alkalmazni.",
+                felhaszn: "A bükk az egyik legsokoldalúbban felhasználható fafajok egyike. A bükk a bútoripar egyik legkeresettebb fafaja. Felhasználják furnér (front- és takart felületek), rétegelt lemez (pl. székülés, széktámla, szekrényhátfal) és tömörfa alkatrészek formájában egyaránt. A bükk Európa legfontosabb furnéripari fafaja: hámozással műszaki furnérokat (rétegelt lemezek gyártása), késeléssel színfurnért készítenek belőle. A bükkből rendkívül szilárd hagyományos rétegelt lemezek, rétegelt tömbök és idompréselt rétegelt lemezek (pl. székülés, széktámla) készíthetők. A vegyes fafajú rétegelt lemezekben a bükköt borító furnérként alkalmazzák. A bükk rétegelt lemezt elsősorban az építészet, bútoripar és a járműipar (pl. vagon-, hajó- és autóbusz-gyártás) használja. A legfontosabb bútoripari felhasználási terület a székgyártás. Az építőiparban a bükköt csak a belső térben célszerű felhasználni (tartóssági okok). Így esztétikus lépcsők, padlóburkolatok (parketták) lambériák és fapultok készíthetők belőle. A bükk felhasználásban ma is jelentős volument képeznek a fűrészelt, telített talpfák. A bükk a legegészségesebb háztartási fatömegcikk alapanyag (mivel nincsenek benne gesztesítő anyagok). Készítenek belőle edényeket, kanalakat, kefetesteket stb. Szívósságát, rugalmasságát jól fel lehet használni a sportszerek (pl. bordásfal) és a szerszámnyelek gyártásában (e területen az akácfa azonban előnyösebb). Hagyományos fafaja a dongagyártásnak (pl. élelmiszer hordók), a bognáripari termékeknek, a kaptafának, a fajátékoknak és az esztergályozott ajándéktárgyaknak. A farostlemezgyártás során a bükk jól feltárható, elő-nyösen alkalmazható. E technológiáknál is ügyelni kell a bükk alapanyag fülledékenységére. Cementkötésű forgácslemezgyártásra a bükk nem javasolható. A bükk értékes keverék fafaj a papírgyártásban, a textilipari viszkózelőállításban, a cellulózgyártásnak pedig pótolhatatlan alapanyaga, továbbá felhasználják fagyapot gyártására is. Kiválóan alkalmas faszéngyártásra és a hasított bükk tűzifa is keresett exporttermék."
+            },
         ];
 
         window.onload = function() {
