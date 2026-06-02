@@ -487,6 +487,51 @@
         alert("A keresett fafaj nem található."); 
         return; 
         }
+
+        document.getElementById('fafaj-lista-container').style.display = 'none';
+    document.getElementById('fafaj-kereso').style.display = 'none';
+    document.getElementById('fafaj-adatlap-nezetház').style.display = 'block';
+
+    const tartalom = document.getElementById('adatlap-tartalom');
+    
+    tartalom.innerHTML = `
+        <h2 style="margin-top:15px;">${fa.nev}</h2>
+        <div class="adatlap-spec">
+            <div class="adatlap-blokk"><strong>Latin név:</strong> <span>${fa.latin}</span></div>
+            <div class="adatlap-blokk"><strong>Típus:</strong> <span>${fa.tipus}</span></div>
+            <div class="adatlap-blokk"><strong>Leírás:</strong> <p>${fa.leiras}</p></div>
+            <div class="adatlap-blokk"><strong>Érdekesség:</strong> <p>${fa.erdekesseg}</p></div>
+            <div class="adatlap-blokk"><strong>Élő fa jellemzői:</strong> <p>${fa.elofa}</p></div>
+            <div class="adatlap-blokk"><strong>Makroszkópos szerkezet:</strong> <p>${fa.makro}</p></div>
+            <div class="adatlap-blokk"><strong>Mikroszkópos szerkezet:</strong> <p>${fa.mikro}</p></div>
+            <div class="adatlap-blokk"><strong>Fahibák, tartósság:</strong> <p>${fa.fahiba}</p></div>
+            <div class="adatlap-blokk"><strong>Sűrűség:</strong> <span>${fa.suruseg}</span></div>
+            
+            <div class="adatlap-blokk"><strong>Zsugorodási értékek (%):</strong>
+                <ul class="adatlap-al-lista">
+                    <li>Rostirányú: ${fa.zsugor.rost}%</li>
+                    <li>Húrirányú: ${fa.zsugor.hur}%</li>
+                    <li>Sugárirányú: ${fa.zsugor.sugar}%</li>
+                    <li>Térfogati: ${fa.zsugor.terf}%</li>
+                </ul>
+            </div>
+            
+            <div class="adatlap-blokk"><strong>Mechanikai tulajdonságok (MPa):</strong>
+                <ul class="adatlap-al-lista">
+                    <li>Rostirányú nyomószilárdság: ${fa.mech.nyomo} MPa</li>
+                    <li>Hajlítószilárdság: ${fa.mech.hajli} MPa</li>
+                    ${fa.mech.kem_butu ? `<li>Bütű keménység: ${fa.mech.kem_butu}</li>` : ''}
+                    <li>Oldalirányú keménység: ${fa.mech.kem_oldal}</li>
+                    <li>Rugalmassági modulusz: ${fa.mech.modulusz} MPa</li>
+                </ul>
+            </div>
+            
+            <div class="adatlap-blokk"><strong>Kémiai tulajdonságok:</strong> <p>${fa.kemia}</p></div>
+            <div class="adatlap-blokk"><strong>Megmunkálhatóság:</strong> <p>${fa.megmunk}</p></div>
+            <div class="adatlap-blokk"><strong>Felhasználási terület:</strong> <p>${fa.felhaszn}</p></div>
+        </div>
+    `;
+}
             document.getElementById('fafaj-lista-container').style.display = 'none';
             document.getElementById('fafaj-kereso').style.display = 'none';
             document.getElementById('fafaj-adatlap-nezetház').style.display = 'block';
