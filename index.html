@@ -597,6 +597,36 @@
 
             eredmenyDiv.innerHTML = `Hajlítószilárdság (σ<sub>h</sub>): ${sigma_h.toFixed(tizedes)} MPa`;
         }
+        // OLDALAK KÖZÖTTI NAVIGÁCIÓ (Ezt töröltük le véletlenül)
+        function showPage(pageId) {
+            // Elrejtünk minden oldalt/szekciót
+            // Megjegyzés: Ha a te kódodban nem pont ezek az ID-k voltak, 
+            // a biztonság kedvéért itt van a legáltalánosabb változat:
+            
+            const pages = ['kalkulator-container', 'fafaj-lista-container', 'fafaj-adatlap-nezetház', 'terkep-container'];
+            pages.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = 'none';
+            });
+
+            // Megjelenítjük a kiválasztott oldalt
+            if (pageId === 'fafajok') {
+                const lista = document.getElementById('fafaj-lista-container');
+                const kereso = document.getElementById('fafaj-kereso');
+                if (lista) lista.style.display = 'block';
+                if (kereso) kereso.style.display = 'block';
+            } else {
+                const activePage = document.getElementById(pageId);
+                if (activePage) activePage.style.display = 'block';
+            }
+        }
+
+        // Visszalépés funkció az adatlapból a listába
+        function visszaAListahoz() {
+            document.getElementById('fafaj-adatlap-nezetház').style.display = 'none';
+            document.getElementById('fafaj-lista-container').style.display = 'block';
+            document.getElementById('fafaj-kereso').style.display = 'block';
+        }
     </script>
 </body>
 </html>
