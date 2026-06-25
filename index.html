@@ -126,6 +126,14 @@
             background-color: var(--accent-color);
             border-color: var(--accent-color);
         }
+        .btn-google {
+            border: 1px solid #4285F4;
+            color: #4285F4;
+        }
+        .btn-google:hover {
+            background-color: rgba(66, 133, 244, 0.1);
+            color: #4285F4;
+        }
 
         .calc-card {
             background-color: var(--card-bg);
@@ -170,7 +178,6 @@
             box-sizing: border-box;
         }
         
-        /* Fafaj lista és részletes adatlap stílusok */
         .fafaj-item {
             background: var(--card-bg);
             padding: 15px;
@@ -202,11 +209,6 @@
             display: inline-block;
             margin-bottom: 2px;
         }
-        .adatlap-al-lista {
-            margin: 5px 0 5px 20px;
-            padding: 0;
-            list-style-type: square;
-        }
 
         .back-bar { margin-bottom: 20px; }
     </style>
@@ -219,6 +221,7 @@
 
     <div class="container">
 
+        <!-- FŐOLDAL -->
         <div id="home" class="page active-page">
             <p style="text-align: center; color: var(--text-muted);">Üdvözöljük a Sopron Fatár országos közösségi térkép és faipari tudástárában!</p>
             <div class="main-menu">
@@ -233,6 +236,7 @@
             </div>
         </div>
 
+        <!-- TÉRKÉP OLDAL -->
         <div id="terkep" class="page">
             <div class="back-bar">
                 <button class="btn btn-secondary" onclick="showPage('home')">⬅ Vissza a főmenübe</button>
@@ -250,20 +254,26 @@
             </div>
         </div>
 
+        <!-- TUDÁSTÁR OLDAL -->
         <div id="tudastar" class="page">
             <div class="back-bar">
                 <button class="btn btn-secondary" onclick="showPage('home')">⬅ Vissza a főmenübe</button>
             </div>
             
             <div class="tudastar-layout">
+                <!-- Oldalsó menü -->
                 <div class="tudastar-nav">
                     <button id="btn-elmelet" class="sub-menu-btn active" onclick="showTudastarContent('elmelet')">📚 Elméleti Anyagok</button>
                     <button id="btn-fafajok" class="sub-menu-btn" onclick="showTudastarContent('fafajok')">🔍 Fafaj Katalógus</button>
                     <button id="btn-kalkulatorok" class="sub-menu-btn" onclick="showTudastarContent('kalkulatorok')">🧮 Kalkulátorok</button>
+                    <!-- ÚJ GOOGLE TÁBLÁZAT GOMB -->
+                    <button class="sub-menu-btn btn-google" onclick="megnyitGoogleTablazat()">📊 Google Táblázat megnyitása</button>
                 </div>
 
+                <!-- Tartalmi rész -->
                 <div class="tudastar-content">
                     
+                    <!-- Elmélet aloldal -->
                     <div id="tuda-elmelet" class="tudastar-subpage" style="display: block; color:#ccc">
                         <h2>Faanyag felépítése</h2>
                         <p>A fa makroszkópos szerkezetének legfontosabb elemei a **szíjács** (a fatörzs külső, élő, nedvességet szállító része) és a **geszt** (a belső, elhalt, sötétebb színű, statikai tartást adó rész).</p>
@@ -281,6 +291,7 @@
                         </ul>
                     </div>
 
+                    <!-- Fafajok aloldal -->
                     <div id="tuda-fafajok" class="tudastar-subpage" style="display: none;">
                         <h2>Fafajok keresője</h2>
                         <input type="text" id="fafaj-kereso" class="search-box" onkeyup="szurFafajok()" placeholder="Gépelj ide a kereséshez (pl. tiszafa, tölgy)...">
@@ -295,6 +306,7 @@
                         </div>
                     </div>
 
+                    <!-- Kalkulátorok aloldal -->
                     <div id="tuda-kalkulatorok" class="tudastar-subpage" style="display: none;">
                         
                         <div class="calc-card" style="background-color: #222; border: 1px solid #444;">
@@ -369,18 +381,21 @@
     </div>
 
     <script>
+        // ÍRD ÁT EZT A LINKET A SAJÁT GOOGLE TÁBLÁZATOD LINKJÉRE:
+        const GOOGLE_TABLAZAT_URL = "https://docs.google.com/spreadsheets/d/123456789X_minta_link_ide/edit?usp=sharing";
+
         const fafajokAdatbazis = [
             { 
                 id: 0,
                 nev: "Tiszafa", 
                 latin: "Taxus baccata", 
                 tipus: "Örökzöld", 
-                leiras: "A tiszafa (Taxus baccata) a nyitvatermők törzsén belül, a szabadmagvas fenyők (toboz nélküli fenyők) (Taxospida) osztályába tartozik, azaz rendszertanilag teljesen különáll a mindenki számára jól ismert tobozos nyitvatermőktől (Coniferospida). A tiszafafélék családjába mindösszesen 20 faj tartozik, és az északi féltekén elterjedt Taxus nemzetségnek 9 faja ismert. Ezekből Európában a közönséges (európai) tiszafa az őshonos. Hasonló szép faanyagot ad Ázsiában a kínai tiszafa (T. chinensis) és a japán tiszafa (T. cuspidata), melyek CITES II. szabályozás alá esnek, Észak-Amerikában pedig az oregoni tiszafa (T. brevifolia). A tiszafa atlanti-mediterrán jellegű flóra elem. Nem gyakori faj. A tiszafás erdők elszigetelt foltokat alkotnak Skandinávia déli részétől egész Európában. Előfordul Észak-Afrikában, Kis- és Nyugat-Ázsiában. Szereti az üde, nedves, laza talajú termőhelyeket, gyakran jelenik meg együtt a bükkel. Árnyéktűrő és jól sarjad. Mesterséges telepítése is eredményes. Hazánkban a Bakonyban, Szentgál mellett és a Bükkben figyelhető meg természetes előfordulása.",
-                erdekesseg: "A tiszafa mérgező hatása: A tiszafa minden része mérgező (kivéve a piros édeskés magköpenyt). A taxin tartalmú tűlevél, mag és kéreg fogyasztása az ember és állatok esetében is súlyos mérgezést okozhat. A fapor irritálja a nyálkahártyát, ezért védőfelszerelés használata ajánlott. Sejtosztódást gátló hatása miatt (taxol kivonat) bizonyos rákos megbetegedések gyógyításában fontos orvosi alapanyag.",
-                elofa: "Törzse korán elágazik, nagy méreteket csak ritkán ér el. Nagyon lassan nő, az évgyűrű szélessége 1 mm körüli. A tűlevelek 1-3 cm hosszúak, laposak. Kétlaki növény. Idősebb korban a kéreg világos rozsdabarna, jellegzetes hosszanti rostos szalagokban válik le.",
-                makro: "A tiszafa szíjácsa rendkívül keskeny, világossárgás, a geszt sötét vörösesbarna. Az évgyűrűk élesen elhatároltak, keskenyek, hullámosak. Nem tartalmaz gyantajáratokat. Rendkívül kellemes, esztétikus megjelenésű.",
-                suruseg: "640 - 670 - 810 kg/m³",
-                felhaszn: "A tiszafa a világ legértékesebb fái közé tartozik. Régen íjkészítésre, ma az igen szerény mennyiségben rendelkezésre álló faanyagot elsősorban a faszobrászatban és dísztárgyak készítésére használják."
+                leiras: "A tiszafa (Taxus baccata) a nyitvatermők törzsén belül, a szabadmagvas fenyők osztályába tartozik. Rendkívül lassan nő, de fája szívós és tartós.",
+                erdekesseg: "Minden része mérgező, kivéve a piros magköpenyt. Sejtosztódást gátló kivonata miatt rákellenes gyógyszerek alapanyaga.",
+                elofa: "Lassan növő, matuzsálemi kort elérő fa. Kérge vörösesbarna, pikkelyes.",
+                makro: "Szíjácsa sárgás és igen keskeny, gesztje sötét vörösesbarna, hullámos évgyűrűkkel.",
+                suruseg: "640 - 810 kg/m³",
+                felhaszn: "Régen íjkészítésre használták, ma a faszobrászat és luxus dísztárgyak nemes alapanyaga."
             },
             { 
                 id: 1,
@@ -399,12 +414,12 @@
                 nev: "Bükk", 
                 latin: "Fagus sylvatica", 
                 tipus: "Lombos", 
-                leiras: "A bükk nemzetségnek mintegy 13 faja az északi mérsékelt égövben őshonos. Európában kiemelkedően fontos szerepe van az egyszerűen bükknek nevezett közönséges bükknek (Fagus sylvatica).",
-                erdekesseg: "Az egészséges (gombafertőzés nélküli) barna álgesztes bükköt a gyakorlatban 'vörösbükk'-nek is nevezik. Különösen hajlamos a fülledésre, ami gyors feldolgozással előzhető meg.",
-                elofa: "Zárt állásban egyenes, hengeres törzset fejleszt. A fák magassága 35-40 m-t is elérhet. A világos, hamuszürke kéreg viszonylag vékony és általában sima marad.",
-                makro: "Edényszórt likacsú fafaj. Fája halvány sárgás-vöröses árnyalatú, gőzölés után jellegzetes vörösesbarna színt kap. Az évgyűrűhatárok finomak, jól láthatóak a széles bélsugarak (tükrök).",
-                suruseg: "540 - 720 - 910 kg/m³",
-                felhaszn: "Bútoripar (különösen székek, hajlított bútorok), furnér- és rétegeltlemez-gyártás, parketta, szerszámnyelek, valamint kiváló tűzifa."
+                leiras: "Európában kiemelkedően fontos erdőalkotó fafaj.",
+                erdekesseg: "Hajlamos a fülledésre, ezért kitermelés után gyors feldolgozást igényel.",
+                elofa: "Egyenes, hengeres törzs, sima, hamuszürke vékony kéreggel.",
+                makro: "Edényszórt likacsú fafaj. Fája halvány sárgás-vöröses árnyalatú, jól látható széles tükrökkel.",
+                suruseg: "540 - 910 kg/m³",
+                felhaszn: "Bútoripar (hajlított székek), rétegelt lemezek, szerszámnyelek, kiváló tűzifa."
             }
         ];
 
@@ -413,7 +428,7 @@
             frissitMindenSzamitast();
         };
 
-        // Oldalváltó logika (Javítva és lezárva)
+        // Oldalváltó logika
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active-page');
@@ -444,6 +459,11 @@
             }
         }
 
+        // Új Google Táblázat megnyitó függvény
+        function megnyitGoogleTablazat() {
+            window.open(https://docs.google.com/spreadsheets/d/e/2PACX-1vTvY16H4UXrflyWfqzu6yn_LHvlzvcRKSpSYsl0gvd20SKPO_25ruzj6xum04xLDGlvj7EchBs0LFEk/pub?gid=2078134923&single=true&output=csv, '_blank');
+        }
+
         // Fafajok listázása
         function megjelenitFafajok(adatok) {
             const listaDiv = document.getElementById('fafaj-lista');
@@ -466,7 +486,7 @@
             });
         }
 
-        // Fafaj szűrés / keresés
+        // Fafaj szűrés
         function szurFafajok() {
             const keresoSzo = document.getElementById('fafaj-kereso').value.toLowerCase();
             const szurtAdatok = fafajokAdatbazis.filter(fa => 
@@ -476,7 +496,7 @@
             megjelenitFafajok(szurtAdatok);
         }
 
-        // Részletes adatlap megjelenítése
+        // Részletes adatlap
         function mutasdAdatlap(id) {
             const fa = fafajokAdatbazis.find(f => f.id === id);
             if (!fa) return;
@@ -509,19 +529,17 @@
             document.getElementById('fafaj-kereso').style.display = 'block';
         }
 
-        // Kerekítési pontosság lekérése
+        // Számítási segédfüggvények
         function getTizedes() {
             return parseInt(document.getElementById('tizedes-valaszto').value);
         }
 
-        // Minden kalkuláció frissítése egy lépésben
         function frissitMindenSzamitast() {
             szamolNedvesség();
             szamolSuruseg();
             szamolHajlitas();
         }
 
-        // 1. Nedvességtartalom Számítás (Nettó / Abszolút és Bruttó)
         function szamolNedvesség() {
             const mu = parseFloat(document.getElementById('mu').value);
             const m0 = parseFloat(document.getElementById('m0').value);
@@ -533,15 +551,11 @@
                 return;
             }
 
-            // Abszolút (nettó) nedvességtartalom: ((mu - m0) / m0) * 100
             const u_netto = ((mu - m0) / m0) * 100;
-            // Relatív (bruttó) nedvességtartalom: ((mu - m0) / mu) * 100
             const u_brutto = ((mu - m0) / mu) * 100;
-
             resDiv.innerText = `Nettó (abszolút): ${u_netto.toFixed(tizedes)}% | Bruttó (relatív): ${u_brutto.toFixed(tizedes)}%`;
         }
 
-        // 2. Sűrűség Számítás (ρ = m / V)
         function szamolSuruseg() {
             const m = parseFloat(document.getElementById('suru-m').value);
             const v = parseFloat(document.getElementById('suru-v').value);
@@ -549,17 +563,15 @@
             const resDiv = document.getElementById('suru-eredmeny');
 
             if (isNaN(m) || isNaN(v) || v <= 0 || m <= 0) {
-                resDiv.innerText = "Hibás adatok! A tömeg és térfogat nagyobb kell legyen mint 0.";
+                resDiv.innerText = "Hibás adatok!";
                 return;
             }
 
             const rho_g_cm3 = m / v;
             const rho_kg_m3 = rho_g_cm3 * 1000;
-
             resDiv.innerText = `Sűrűség (ρ): ${rho_g_cm3.toFixed(tizedes)} g/cm³ (${rho_kg_m3.toFixed(0)} kg/m³)`;
         }
 
-        // 3. Hajlítószilárdság Számítás (σ_h = (3 * F * L) / (2 * b * h²))
         function szamolHajlitas() {
             const F = parseFloat(document.getElementById('hajl-f').value);
             const L = parseFloat(document.getElementById('hajl-l').value);
@@ -569,13 +581,11 @@
             const resDiv = document.getElementById('hajl-eredmeny');
 
             if (isNaN(F) || isNaN(L) || isNaN(b) || isNaN(h) || b <= 0 || h <= 0) {
-                resDiv.innerText = "Hibás adatok! Minden méretnek és erőnek pozitívnak kell lennie.";
+                resDiv.innerText = "Hibás adatok!";
                 return;
             }
 
-            // Képlet: (3 * F * L) / (2 * b * h^2)
             const sigma_h = (3 * F * L) / (2 * b * Math.pow(h, 2));
-
             resDiv.innerText = `Hajlítószilárdság (σh): ${sigma_h.toFixed(tizedes)} N/mm² (MPa)`;
         }
     </script>
