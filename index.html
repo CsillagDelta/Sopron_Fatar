@@ -264,7 +264,7 @@
 
                 <div class="tudastar-content">
                     
-                    <div id="tuda-elmelet" class="tudastar-subpage" style="display: block; color:ccc">
+                    <div id="tuda-elmelet" class="tudastar-subpage" style="display: block;">
                         <h2>Faanyag felépítése</h2>
                         <p>A fa makroszkópos szerkezetének legfontosabb elemei a **szíjács** (a fatörzs külső, élő, nedvességet szállító része) és a **geszt** (a belső, elhalt, sötétebb színű, statikai tartást adó rész).</p>
                         <p><strong>Likacsok szerinti csoportosítás:</strong></p>
@@ -369,80 +369,72 @@
     </div>
 
     <script>
-        // Bővített fafaj adatbázis a Te Tiszafa leírásoddal!
-        const fafajokAdatbazis = [
-            { 
-                id: 0,
-                nev: "Tiszafa", 
-                latin: "Taxus baccata", 
-                tipus: "Örökzöld", 
-                leiras: "A tiszafa (Taxus baccata) a nyitvatermők törzsén belül, a szabadmagvas fenyők (toboz nélküli fenyők) (Taxospida) osztályába tartozik, azaz rendszertanilag teljesen különáll a mindenki számára jól ismert tobozos nyitvatermőktől (Coniferospida). A tiszafafélék családjába mindösszesen 20 faj tartozik, és az északi féltekén elterjedt Taxus nemzetségnek 9 faja ismert. Ezekből Európában a közönséges (európai) tiszafa az őshonos. Hasonló szép faanyagot ad Ázsiában a kínai tiszafa (T. chinensis) és a japán tiszafa (T. cuspidata), melyek CITES II. szabályozás alá esnek, Észak-Amerikában pedig az oregoni tiszafa (T. brevifolia). A tiszafa atlanti-mediterrán jellegű flóra elem. Nem gyakori faj. A tiszafás erdők elszigetelt foltokat alkotnak Skandinávia déli részétől egész Európában. Előfordul Észak-Afrikában, Kis- és Nyugat-Ázsiában. Szereti az üde, nedves, laza talajú termőhelyeket, gyakran jelenik meg együtt a bükkel. Árnyéktűrő és jól sarjad. Mesterséges telepítése is eredményes. Hazánkban a Bakonyban, Szentgál mellett és a Bükkben figyelhető meg természetes előfordulása. Az ókorban és a középkorban a tiszafa gyakorisága nagyobb volt, erre utalnak az Európa-szerte található helynevek (Yverdon -Svájc, Iberg - Németország, Les Iffs - Franciaország stb.).",
-                erdekesseg: "A tiszafa mérgező hatása: A tiszafa minden része mérgező (kivéve a piros édeskés magköpenyt). A taxin tartalmú tűlevél, mag és kéreg fogyasztása az ember és állatok esetében is súlyos mérgezést okozhat: a halálos dózis embernél 1 g/kg testtömeg, lónál 2 g/kg, marhánál 10 g/kg, üregi nyúlnál 20 g/kg. Játszóterekre, óvodák, iskolák kertjébe nem javasolható a tiszafa telepítése. A tiszafa megmunkáláskor a szálkájának bökése a fában lévő méreganyag miatt bőrgyulladást okoz, a fapor pedig más faanyaghoz képest jobban irritálja a nyálkahártyát, ezért védőfelszerelés használata ajánlott.",
-                elofa: "Törzse korán elágazik, nagy méreteket csak ritkán ér el. Nagyon lassan nő, az évgyűrű szélessége 1 mm körüli, ritkán éri el az 0,5-0,6 m átmérőt. A tiszafa hajlamos a korai elágazásra, bokrosodásra. A tűlevelek 1-3 cm hosszúak, 2-5 mm szélesek, laposak. Kétlaki növény. Magköpenyes magjának külső burka kárminpiros. A tiszafa kérge a fiatal hajtásokon és ágakon zöld, később barnászöld. Idősebb korban a kéreg világos rozsdabarna, szürke csíkokkal, foltokkal, jellegzetes hosszanti rostos szalagokban válik le.",
-                makro: "A tiszafa szíjácsa rendkívül keskeny, világossárgás, a geszt sötét vörösesbarna. Az évgyűrűk élesen elhatároltak, keskenyek, hullámosak; a sötétebb késői pászta jól elválik a koraitól. A keskeny bélsugarak a bütümetszeten nem láthatók, de a finom bélsugártükrök a sugárirányú hosszmetszeten jól kivehetők. Nem tartalmaz gyantajáratokat. Rendkívül kellemes, esztétikus megjelenésű.",
-                mikro: "Nyitvatermőként csak tracheidák alkotják a fatestet (nincsenek tracheák, farostok), melyek szabályos sugárirányú sorokba rendezettek, spirális falvastagodással rendelkeznek, és jellemzően rövidebbek a tobozos nyitvatermők tracheidáihoz képest. A bélsugarak homogén szerkezetűek. Egy sejtsor szélesek és 10-25 sejtsor magasak.",
-                fahiba: "A tiszafa egyenes hengeres törzset csak igen ritkán növeszt. Korán elágazik és a törzskeresztmetszete szabálytalan, bordás. Abiotikus károsítói a szélsőséges hőmérsékleti hatások, azaz sem az erősen hideg teleket, sem a száraz, meleg nyarakat nem bírja. Az élő tiszafa rendkívül ellenálló a légszennyeződésekkel (pl. SO₂) szemben. A tiszafából készült kültéri tárgyak jól ellenállnak az időjárási kitettségeknek.",
-                suruseg: "640-670-810 kg/m³",
-                zsugor: { rost: "0,4", hur: "5,3", sugar: "3,7", terf: "8,4-9,2" },
-                mech: { nyomo: "58", hajli: "92", kem_butu: "65-71", kem_oldal: "31", modulusz: "12000-15000" },
-                kemia: "A taxol (az oregoni tiszafa kéreg kivonata) felfedezése óta sikeresen fejlesztettek gyógyszereket a taxin alapú alkaloidokból. Sejtosztódást gátló hatása miatt a méh-, mell-, petefészek-, prosztatarák gyógyításában fontos.",
-                megmunk: "Nagy keménysége és szabálytalan szöveti szerkezete miatt a megmunkálása energiaigényes. Nehezen hasad, de gyalulásnál szép felületet ad. Jól esztergályozható, faragható. Előzetes gőzölés után fájából esetenként furnért is hasítanak. Könnyen és jól szárítható, nem hajlamos repedésre, vetemedésre. A ragasztása is problémamentes. Jól pácolható (sötét pácok esetén az ébenfára emlékeztet). Felületkezelésnél fényes és matt felületek egyaránt jól kialakíthatók.",
-                felhaszn: "A tiszafa a világ legértékesebb fái közé tartozik. A belőle készített tárgyak közül az egyik legrégibb lelet az i.e. 1400-ból származó szobrocska Teje egyiptomi király nő arcmásával (berlini múzeum). Tiszafából készített íjakat az i.e. 3000-1800 évekből - őriznek a zürichi múzeumban. Az ókorból sok tiszafából készült házieszközt is felleltek: kanalakat, fésüket, vödröket, hordókat stb. Az építészetben küszöbök és oszlopok készültek tiszafából. A lõpor elterjedéséig (XVII. század) a tiszafa volt az íjkészítés legfontosabb anyaga (különösen a közép- és nyugat-európaiak kedvelték, a magyar íjak többnyire körisből készültek). A míves bútorok gyártására a XVIII. századtól kezdik a tiszafát felhasználni nemcsak tömörfaként, hanem furnérként is (pl. intarziás bútorok). A nagytétényi kastélymúzeumban találhatunk szép tiszafa berakásos bútorokat. Ma az igen szerény mennyiségben rendelkezésre álló tiszafát elsősorban a faszobrászatban és dísztárgyak készítésére használják faragásra, esztergályozásra."
-            },
-            { 
-                id: 1,
-                nev: "Kocsányos tölgy", 
-                latin: "Quercus robur", 
-                tipus: "Lombos - Keményfa", 
-                leiras: "A kocsányos tölgy Európa nagy részén őshonos...",
-                erdekesseg: "A tölgyfa makkja fontos vadeleség, kérge cserzőanyagot tartalmaz...",
-                elofa: "Hatalmas termetű, matuzsálemi kort megérő fa, mélyen barázdált kéreggel...",
-                makro: "Gyűrűs likacsú fafaj. Gesztje sárgásbarna, szíjácsa keskeny, világos...",
-                mikro: "Széles edények a korai pásztában, vastag falú libriform rostok...",
-                fahiba: "Fülledésre nem hajlamos, de fagyrepedések kialakulhatnak rajta...",
-                suruseg: "650 kg/m³",
-                zsugor: { rost: "0.3", hur: "6.2", sugar: "4.1", terf: "10" },
-                mech: { nyomo: "41.9", hajli: "84.8", kem_oldal: "2620", modulusz: "11350" },
-                kemia: "Magas tannin (csersav) tartalma védi a gombáktól...",
-                megmunk: "Keménysége ellenére jól megmunkálható, gőzölve jól hajlítható...",
-                felhaszn: "Hordógyártás (borok, whiskyk érlelése), parketta, bútoripar, vasúti talpfák..."
-            },
-            { 
-                id: 2,
-                nev: "Bükk", 
-                latin: "Fagus sylvatica", 
-                tipus: "Lombos", 
-                leiras: "A bükk nemzetségnek mintegy 13 faja az északi mérsékelt égövben őshonos. Európában kiemelkedően fontos szerepe van az egyszerűen bükknek nevezett közönséges bükknek (Fagus sylvatica). Délkelet-Európában, a Kaukázusban, Kis-Ázsiában található a keleti bükk (F. orientalis), amely valamivel melegebb klímát igényel, mint a közönséges bükk. Észak-Amerikában elterjedt az amerikai bükk (F. grandifolia), Japánban és a Távol-Keleten a japán bükk (F. crenata). A különböző bükk fajok fája között jelentős különbség nincs.",                erdekesseg: "Az egészséges (gombafertőzés nélküli) barna álgesztes bükköt a gyakorlatban 'vörösbükk'-nek is nevezik...",
-                erdekesseg: "Az egészséges (gombafertőzés nélküli) barna álgesztes bükköt a gyakorlatban 'vörösbükk'-nek is nevezik. Az álgeszt határa nem követi az évgyűrű vonalát, tehát szabálytalan. Az ún. szürke vagy csillagos álgeszt már gombával fertőzött, korhadó faanyag, iparilag már nem hasznosítható. A bükk egészséges álgesztjeinek kialakulása fiziológiai okokra (pl. öregedés, vízellátási zavarok), vagy mechanikai sérülésekre vezethető vissza. Az ilyen fa keményebb és tartósabb, de jobban reped, nem telíthető és nehezebben munkálható meg. Az álgesztesedés a színbeli eltérések miatt igen jelentős esztétikai hiba is lehet a bútor-, parketta- és rétegeltlemez-gyártásban, pedig az egészséges álgeszttel rendelkező fa ezeken a területeken felhasználható. Nyugat-Európában az álgesztes bükknek a bútoriparban és beltéri építkezésben való elfogadottságára irányult törekvések eredményesek.",
-                elofa: "Zárt állásban egyenes, hengeres törzset fejleszt. A fák magassága 35-40 m-t is elérhet, az ágtiszta törzshossz pedig 15-20 m. Véghasználati korban (100-120 év) a mellmagassági átmérő 0,4-0,7 m. Idősebb korban (200-300 év) elérheti az 1,5-1,8 m-t is. A világos, hamuszürke kéreg viszonylag vékony (1-2 cm) és csak igen ritkán repedezik, általában sima marad.",
-                makro: "Fája nagyon aromatikus, kellemes illatával tűnik fel. Szijácsa keskeny, sárgás színű, gesztje vörösesbarna. A fatest homogén, keskeny, nagyon keskeny évgyűrűi vannak, melyekben a késői pászta egyenletesen vékony, rajzolara finom, gyakran nem kivehető. Gyantajárat gyakori, főként a késői pásztában, vagy annak közelében található. Gyakoriak a kisebb méretű, benőtt göcsök, melyek sötétebb színűek.",
-                mikro: "A fatestet lényegében csak tracheidák alkotják, melyek szabályos, radiális sorokat képeznek, szögletesek. A fenyőkre jellemzően a késői pásztában lévő tracheidák vastagabb falúak, a koraié vékonyabbak, az átmenet fokozatos. A késői pászta keskeny. A faparenchima alig található benne. A bélsugarak egy sejtsor szélesek, a gyantajárat körül kiszélesednek, heterogén felépítésűek, 5-15 sejtsor magasak. A fajra jellemző, hogy a bélsugártracheidák fala vékony és sima, a kereszteződési mezőkben jól láthatóak a Pinus nemzetségre jellemző ablakos gödörkék. A gyantajáratok a késői pásztában vagy annak közelében vannak, az epitélsejteknek vékony fala van.",
-                fahiba: "A bükk fahibái közül első helyen az álgesztesedést kell említeni, ami az idősebb törzseknél rendkívül gyakori. A bükk hengeres fa minősítésekor különösen a göcsösségre fordítandó kiemelt figyelem. A nem látható göcsöknél az ágbenövés helyén keletkező kéregredő (kínai bajusz) szárai által bezárt szög alapján következtethetünk a göcs mélységére (távolság a fapalásttól). A bükk hengeresfánál is gyakori a sudarlósság, a görbeség, a külpontosság, különböző repedések és a fagyléc. A lábon álló, legyengült fákat különböző gombák (pl. Nectria, Fomes, Polyporus és Trametes fajok) és rovarok is megtámadhatják. Az így keletkező korhadt, rovarrágott részek jelentősen csökkentik a faanyag értékét. A bükk érzékeny a mechanikai sérülésekre. Így a nevelő vágások során nagyon kell ügyelni a visszamaradó törzsek épségére. E mechanikai sérülések akkor is veszélyesek, ha gombafertőzés nem is következik be, mivel a faanyag elszíneződését eredményezik.A bükk különösen hajlamos a fülledésre. E fertőzés okaí a különböző gombafajok fellépése. A fülledés megelőzhető, ha a bükk kitermelését az őszi, kora tavaszi időszakra tervezzük és a kitermelt faanyagot gyorsan feldolgozzuk. Ettől eltérő munkaszervezési kényszer esetén meg kell oldani a vízben való tárolást, esetleg a permetezést. A szórtlikacsú, színes geszt nélküli, kémiailag inaktív bükk nem tartozik a természetesen tartós fafajok közé. Figyelemmel az alacsony gombaállóságra, és az erős veremedési hajlamára is, az álgeszt nélküli bükk kültéri beépítésre, felhasználásra csak teljes telítés esetén javasolható (pl. vasúti talpfák).",
-                fizikai: "A bükk fája nagy sűrűségű. A zsugorodási anizotrópía (húr/sugár): 2,04, tehát igen hajlamos a vetemedésre, a széles bélsugarak mentén pedig a repedésre. A frissen döntött bükk 400-500 kg/m³ vizet tartalmaz. A geszt és a szijács nedvessége között a különbség nem jelentős. A rosttelítettségi pont: 32-35%.",
-                suruseg: "540-720-910 kg/m³",
-                zsugor: { rost: "0.3", hur: "11.8", sugar: "5.8", terf: "14.0-17.9-21.0" },
-                mech: {
-                    nyomo: "35 - 50 - 79",
-                    hajli: "49 - 78 - 136",
-                    huz_parh: "21 - 90 - 245",
-                    huz_merol: "2.7",
-                    nyiro_hur: "4.0 - 6.7 - 12.0",
-                    uto_hajl: "1.0 - 5.0 - 11.0",
-                    kem_butu: "32 (Brinell)",
-                    kem_oldal: "12 (Brinell)",
-                    modulusz: "7300 - 11000 - 21400",
-                    hasit_sug: "0.2",
-                    csavaro: "5.3 - 9.0 - 14.0"
-                },
-                kemia: "A hamu 15-20%o-ben K₂O-t tartalmaz, mely alapján a bükk különösen alkalmas volt a hamuzsír (K₂CO₃) kinye-résére. Pirolízise során olyan hasznos melléktermékek is képződnek, mint a metilalkohol, az ecetsav és a fakátrány. A bükk hemicellulózaiból (pentozánok) előnyösen gyártható a furfurol is. A bükk enyhén savas, pH: 5,1-5,4.",
-                megmunk: "Nehézségek nélkül dolgozható fel a különböző mechanikai megmunkálási technológiákkal, jól fűrészelhető, marható és esztergályozható. A fűrészáru szárításakor figyelembe kell venni a bükk erős zsugorodását (beszáradási túlméretek, vetemedés) és széles bélsugarait (repedési hajlam). A bükk hátrányos tulajdonságainak (erős zsugorodás, tarkaság) mérsékelésére elterjedten alkalmazzák a fűrészáru vagy a rönk gőzölését. A bükk rönkök gőzölése elsősorban a mechanikai megmunkálást (hámozás, furnér késelés) készíti elő. A bükk gőzölését felhasználják a tömörfa elemek hajlíthatóságának a növelésére is. Kiválóan hámozható, késelhető. A gőzöléssel előkészített bükk kiválóan hajlítható. A bükk furnér és tömörfa a faiparban alkalmazott ragasztóanyagokkal jól ragasztható. A bükk jól pácolható, lakkozható, a pácolás segítségével biztosítható az álgesztes anyag színhomogenizálása is. A bükk jól szegezhető, csavarozható, de a repedések megelőzésére célszerű előfúrást alkalmazni.",
-                felhaszn: "A bükk az egyik legsokoldalúbban felhasználható fafajok egyike. A bükk a bútoripar egyik legkeresettebb fafaja. Felhasználják furnér (front- és takart felületek), rétegelt lemez (pl. székülés, széktámla, szekrényhátfal) és tömörfa alkatrészek formájában egyaránt. A bükk Európa legfontosabb furnéripari fafaja: hámozással műszaki furnérokat (rétegelt lemezek gyártása), késeléssel színfurnért készítenek belőle. A bükkből rendkívül szilárd hagyományos rétegelt lemezek, rétegelt tömbök és idompréselt rétegelt lemezek (pl. székülés, széktámla) készíthetők. A vegyes fafajú rétegelt lemezekben a bükköt borító furnérként alkalmazzák. A bükk rétegelt lemezt elsősorban az építészet, bútoripar és a járműipar (pl. vagon-, hajó- és autóbusz-gyártás) használja. A legfontosabb bútoripari felhasználási terület a székgyártás. Az építőiparban a bükköt csak a belső térben célszerű felhasználni (tartóssági okok). Így esztétikus lépcsők, padlóburkolatok (parketták) lambériák és fapultok készíthetők belőle. A bükk felhasználásban ma is jelentős volument képeznek a fűrészelt, telített talpfák. A bükk a legegészségesebb háztartási fatömegcikk alapanyag (mivel nincsenek benne gesztesítő anyagok). Készítenek belőle edényeket, kanalakat, kefetesteket stb. Szívósságát, rugalmasságát jól fel lehet használni a sportszerek (pl. bordásfal) és a szerszámnyelek gyártásában (e területen az akácfa azonban előnyösebb). Hagyományos fafaja a dongagyártásnak (pl. élelmiszer hordók), a bognáripari termékeknek, a kaptafának, a fajátékoknak és az esztergályozott ajándéktárgyaknak. A farostlemezgyártás során a bükk jól feltárható, elő-nyösen alkalmazható. E technológiáknál is ügyelni kell a bükk alapanyag fülledékenységére. Cementkötésű forgácslemezgyártásra a bükk nem javasolható. A bükk értékes keverék fafaj a papírgyártásban, a textilipari viszkózelőállításban, a cellulózgyártásnak pedig pótolhatatlan alapanyaga, továbbá felhasználják fagyapot gyártására is. Kiválóan alkalmas faszéngyártásra és a hasított bükk tűzifa is keresett exporttermék."
-            },
-        ];
+// GLOBÁLIS ADATBÁZIS (A Google Táblázatból fog megtelni)
+        let fafajokAdatbazis = [];
+        const GOOGLE_SHEETS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTvY16H4UXrflyWfqzu6yn_LHvlzvcRKSpSYsl0gvd20SKPO_25ruzj6xum04xLDGlvj7EchBs0LFEk/pub?gid=2078134923&single=true&output=csv";
+
+        // CSV FÁJL ÉRTELMEZŐ (Kezeli az idézőjeleket és az új sorokat a cellákon belül)
+        function parseCSV(text) {
+            let lines = [];
+            let row = [""];
+            let inQuotes = false;
+            for (let i = 0; i < text.length; i++) {
+                let c = text[i];
+                let next = text[i+1];
+                if (c === '"') {
+                    if (inQuotes && next === '"') { row[row.length - 1] += '"'; i++; }
+                    else { inQuotes = !inQuotes; }
+                } else if (c === ',' && !inQuotes) {
+                    row.push('');
+                } else if ((c === '\r' || c === '\n') && !inQuotes) {
+                    if (c === '\r' && next === '\n') { i++; }
+                    lines.push(row);
+                    row = [''];
+                } else {
+                    row[row.length - 1] += c;
+                }
+            }
+            if (row.length > 1 || row[0] !== '') lines.push(row);
+            return lines;
+        }
+
+        // TÁBLÁZAT BETÖLTÉSE ÉS INTEGRÁLÁSA
+        async function betoltAdatbazis() {
+            try {
+                const response = await fetch(GOOGLE_SHEETS_CSV_URL);
+                const csvText = await response.text();
+                const rows = parseCSV(csvText);
+                
+                if (rows.length < 2) return;
+                
+                const headers = rows[0].map(h => h.trim());
+                fafajokAdatbazis = [];
+
+                for (let i = 1; i < rows.length; i++) {
+                    const row = rows[i];
+                    if (row.length < headers.length || !row[0]) continue;
+
+                    let fa = {};
+                    headers.forEach((header, index) => {
+                        fa[header] = row[index] ? row[index].trim() : "";
+                    });
+
+                    // Sorosító ID generálása a keresőhöz
+                    fa.id = i - 1; 
+                    fafajokAdatbazis.push(fa);
+                }
+
+                // Felület frissítése a friss adatokkal
+                megjelenitFafajok(fafajokAdatbazis);
+                frissitMindenSzamitast();
+            } catch (error) {
+                console.error("Nem sikerült beolvasni a Google Táblázatot:", error);
+                document.getElementById('fafaj-lista').innerHTML = "<p style='color:red;'>Hiba történt az online adatbázis betöltésekor. Kérjük, ellenőrizze az internetkapcsolatot!</p>";
+            }
+        }
 
         window.onload = function() {
-            megjelenitFafajok(fafajokAdatbazis);
-            frissitMindenSzamitast();
+            betoltAdatbazis();
         };
 
         function showPage(pageId) {
@@ -480,8 +472,7 @@
             lista.forEach(fa => {
                 listaDiv.innerHTML += `
                     <div class="fafaj-item" onclick="megnyitAdatlap(${fa.id})">
-                        <h3>${fa.nev} <span class="fafaj-latin">(${fa.latin})</span></h3>
-                        <div style="font-size:0.8rem; color:var(--accent-color);">${fa.tipus}</div>
+                        <h3>${fa.Fa_neve || 'Névtelen fafaj'}</h3>
                     </div>
                 `;
             });
@@ -490,8 +481,7 @@
         function szurFafajok() {
             let keresoSzo = document.getElementById('fafaj-kereso').value.toLowerCase();
             let szurtLista = fafajokAdatbazis.filter(fa => 
-                fa.nev.toLowerCase().includes(keresoSzo) || 
-                fa.latin.toLowerCase().includes(keresoSzo)
+                (fa.Fa_neve && fa.Fa_neve.toLowerCase().includes(keresoSzo))
             );
             megjelenitFafajok(szurtLista);
         }
@@ -509,51 +499,35 @@
             document.getElementById('fafaj-kereso').style.display = 'none';
             document.getElementById('fafaj-adatlap-nezetház').style.display = 'block';
 
+            // Segédfüggvény az újsorok (sortörések) megtartására a cellákból
+            const formazSzoveg = (szoveg) => szoveg ? szoveg.replace(/\n/g, '<br>') : "Adat nem elérhető";
+
             const tartalom = document.getElementById('adatlap-tartalom');
             tartalom.innerHTML = `
-                <h2 style="margin-top:15px;">${fa.nev}</h2>
+                <h2 style="margin-top:15px; color: var(--accent-color);">${fa.Fa_neve || 'Ismeretlen fafaj'}</h2>
                 <div class="adatlap-spec">
-                    <div class="adatlap-blokk"><strong>Latin név:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${fa.latin}</p></div>
-                    <div class="adatlap-blokk"><strong>Típus:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${fa.tipus}</p></div>
-                    <div class="adatlap-blokk"><strong>Leírás:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${fa.leiras}</p></div>
-                    <div class="adatlap-blokk"><strong>Érdekesség:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${fa.erdekesseg}</p></div>
-                    <div class="adatlap-blokk"><strong>Élő fa jellemzői:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${fa.elofa}</p></div>
-                    <div class="adatlap-blokk"><strong>Makroszkópos szerkezet:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${fa.makro}</p></div>
-                    <div class="adatlap-blokk"><strong>Mikroszkópos szerkezet:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${fa.mikro}</p></div>
-                    <div class="adatlap-blokk"><strong>Fahibák, tartósság:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${fa.fahiba}</p></div>
-                    <div class="adatlap-blokk"><strong>Sűrűség:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${fa.suruseg}</p></div>
-
-                    <div class="adatlap-blokk"><strong>Zsugorodási értékek (%):</strong>
-                        <ul class="adatlap-al-lista" style="color:#ccc;">
-                            <li>Rostirányú: ${fa.zsugor.rost}%</li>
-                            <li>Húrirányú: ${fa.zsugor.hur}%</li>
-                            <li>Sugárirányú: ${fa.zsugor.sugar}%</li>
-                            <li>Térfogati: ${fa.zsugor.terf}%</li>
-                        </ul>
+                    <div class="adatlap-blokk" style="color:#ccc;"><strong>Leírás:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${formazSzoveg(fa.Leírás)}</p></div>
+                    <div class="adatlap-blokk" style="color:#ccc;"><strong>Érdekesség:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${formazSzoveg(fa.Érdekesség)}</p></div>
+                    <div class="adatlap-blokk" style="color:#ccc;"><strong>Élőfa jellemzői:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${formazSzoveg(fa['Élőfa jellemzői'])}</p></div>
+                    <div class="adatlap-blokk" style="color:#ccc;"><strong>Makroszkópikus szerkezet:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${formazSzoveg(fa.Makroszkópikus)}</p></div>
+                    <div class="adatlap-blokk" style="color:#ccc;"><strong>Mikroszkópikus szerkezet:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${formazSzoveg(fa.Mikroszkópikus)}</p></div>
+                    <div class="adatlap-blokk" style="color:#ccc;"><strong>Fahibák, károsodások, tartósság:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${formazSzoveg(fa.Fahibák_fakárosodások_tartósság)}</p></div>
+                    <div class="adatlap-blokk" style="color:#ccc;"><strong>Fizikai tulajdonságok:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${formazSzoveg(fa.Fizikai)}</p></div>
+                    <div class="adatlap-blokk" style="color:#ccc;"><strong>Sűrűség:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${formazSzoveg(fa.Sűrűség)}</p></div>
+                    <div class="adatlap-blokk" style="color:#ccc;"><strong>Zsugorodás:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${formazSzoveg(fa.Zsugorodás)}</p></div>
+                    
+                    <div class="adatlap-blokk" style="color:#ccc;">
+                        <strong>Mechanikai tulajdonságok:</strong> 
+                        <p style="margin:2px 0 0 0; color:#ccc; line-height: 1.6;">${formazSzoveg(fa.Mechanikai)}</p>
                     </div>
                     
-                    <div class="adatlap-blokk" style="color:#ccc;"><strong>Mechanikai tulajdonságok (MPa / J/cm²):</strong>
-                       <ul class="adatlap-al-lista" style="color:#ccc;">
-                            <li>Rostirányú nyomószilárdság: ${fa.mech.nyomo} MPa</li>
-                            <li>Hajlítószilárdság: ${fa.mech.hajli} MPa</li>
-                            <li>Rostokkal párhuzamos húzószilárdság: ${fa.mech.huz_parh} MPa</li>
-                            <li>Rostokra merőleges húzószilárdság: ${fa.mech.huz_merol} MPa</li>
-                            <li>Húrirányú nyírószilárdság: ${fa.mech.nyiro_hur} MPa</li>
-                            <li>Ütő-hajlító szilárdság: ${fa.mech.uto_hajl} J/cm²</li>
-                            <li>Bütű keménység: ${fa.mech.kem_butu}</li>
-                            <li>Oldalirányú keménység: ${fa.mech.kem_oldal}</li>
-                            <li>Hajlító rugalmassági modulusz: ${fa.mech.modulusz} MPa</li>
-                            <li>Sugárirányú hasítószilárdság: ${fa.mech.hasit_sug} MPa</li>
-                            <li>Csavarószilárdság: ${fa.mech.csavaro} MPa</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="adatlap-blokk"><strong>Kémiai tulajdonságok:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${fa.kemia}</p></div>
-                    <div class="adatlap-blokk"><strong>Megmunkálhatóság:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${fa.megmunk}</p></div>
-                    <div class="adatlap-blokk"><strong>Felhasználási terület:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${fa.felhaszn}</p></div>
+                    <div class="adatlap-blokk" style="color:#ccc;"><strong>Kémiai tulajdonságok:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${formazSzoveg(fa['Kémiai tulajdonságok'])}</p></div>
+                    <div class="adatlap-blokk" style="color:#ccc;"><strong>Megmunkálási sajátosságok:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${formazSzoveg(fa.Megmunkálási sajátosságok)}</p></div>
+                    <div class="adatlap-blokk" style="color:#ccc;"><strong>Felhasználás:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${formazSzoveg(fa.Fölhasználás)}</p></div>
                 </div>
             `;
         }
+        
 
         function visszaAListahoz() {
             document.getElementById('fafaj-lista-container').style.display = 'block';
