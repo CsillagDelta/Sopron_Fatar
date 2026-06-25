@@ -511,19 +511,19 @@
 
             const tartalom = document.getElementById('adatlap-tartalom');
             tartalom.innerHTML = `
-                <h2 style="margin-top:15px; color: var(--accent-color);">${fa.nev}</h2>
+                <h2 style="margin-top:15px;">${fa.nev}</h2>
                 <div class="adatlap-spec">
-                    <div class="adatlap-blokk" style="color:#ccc;"><strong>Latin név:</strong> <span>${fa.latin}</span></div>
-                    <div class="adatlap-blokk" style="color:#ccc;"><strong>Típus:</strong> <span>${fa.tipus}</span></div>
+                    <div class="adatlap-blokk"><strong>Latin név:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${fa.latin}</p></div>
+                    <div class="adatlap-blokk"><strong>Típus:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${fa.tipus}</p></div>
                     <div class="adatlap-blokk"><strong>Leírás:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${fa.leiras}</p></div>
                     <div class="adatlap-blokk"><strong>Érdekesség:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${fa.erdekesseg}</p></div>
                     <div class="adatlap-blokk"><strong>Élő fa jellemzői:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${fa.elofa}</p></div>
                     <div class="adatlap-blokk"><strong>Makroszkópos szerkezet:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${fa.makro}</p></div>
                     <div class="adatlap-blokk"><strong>Mikroszkópos szerkezet:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${fa.mikro}</p></div>
                     <div class="adatlap-blokk"><strong>Fahibák, tartósság:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${fa.fahiba}</p></div>
-                    <div class="adatlap-blokk" style="color:#ccc;"><strong>Sűrűség:</strong> <span>${fa.suruseg}</span></div>
-                    
-                    <div class="adatlap-blokk" style="color:#ccc;"><strong>Zsugorodási értékek (%):</strong>
+                    <div class="adatlap-blokk"><strong>Sűrűség:</strong> <p style="margin:2px 0 0 0; color:#ccc;">${fa.suruseg}</p></div>
+
+                    <div class="adatlap-blokk"><strong>Zsugorodási értékek (%):</strong>
                         <ul class="adatlap-al-lista" style="color:#ccc;">
                             <li>Rostirányú: ${fa.zsugor.rost}%</li>
                             <li>Húrirányú: ${fa.zsugor.hur}%</li>
@@ -532,8 +532,8 @@
                         </ul>
                     </div>
                     
-                    <div class="adatlap-blokk" style="color:#ccc;"><strong>Mechanikai tulajdonságok (MPa / J/cm²):</strong>
-                        <ul class="adatlap-al-lista" style="color:#ccc;">
+                    <div class="adatlap-blokk"><strong>Mechanikai tulajdonságok (MPa / J/cm²):</strong>
+                       <ul class="adatlap-al-lista">
                             <li>Rostirányú nyomószilárdság: ${fa.mech.nyomo} MPa</li>
                             <li>Hajlítószilárdság: ${fa.mech.hajli} MPa</li>
                             <li>Rostokkal párhuzamos húzószilárdság: ${fa.mech.huz_parh} MPa</li>
