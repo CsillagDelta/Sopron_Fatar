@@ -264,7 +264,7 @@
 
                 <div class="tudastar-content">
                     
-                    <div id="tuda-elmelet" class="tudastar-subpage" style="display: block; color:ccc">
+                    <div id="tuda-elmelet" class="tudastar-subpage" style="display: block; color:#ccc">
                         <h2>Faanyag felépítése</h2>
                         <p>A fa makroszkópos szerkezetének legfontosabb elemei a **szíjács** (a fatörzs külső, élő, nedvességet szállító része) és a **geszt** (a belső, elhalt, sötétebb színű, statikai tartást adó rész).</p>
                         <p><strong>Likacsok szerinti csoportosítás:</strong></p>
@@ -432,9 +432,9 @@
     
     // EGYESÍTETT INDÍTÁS
     window.onload = function() {
-        betoltAdatbazis();
-        frissitMindenSzamitast();
-    };
+    betoltAdatbazis(); // Ez letölti az adatokat és automatikusan kirajzolja a listát
+    frissitMindenSzamitast(); // Ez pedig alaphelyzetbe állítja a kalkulátorokat
+};
 
     function showPage(pageId) {
         document.querySelectorAll('.page').forEach(page => {
