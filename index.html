@@ -170,7 +170,6 @@
             box-sizing: border-box;
         }
         
-        /* Fafaj lista és részletes adatlap stílusok */
         .fafaj-item {
             background: var(--card-bg);
             padding: 15px;
@@ -363,11 +362,9 @@
     </div>
 
     <script>
-    // GLOBÁLIS ADATBÁZIS (A Google Táblázatból fog megtelni)
     let fafajokAdatbazis = [];
     const GOOGLE_SHEETS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTvY16H4UXrflyWfqzu6yn_LHvlzvcRKSpSYsl0gvd20SKPO_25ruzj6xum04xLDGlvj7EchBs0LFEk/pub?gid=2078134923&single=true&output=csv";
     
-    // CSV FÁJL ÉRTELMEZŐ
     function parseCSV(text) {
         let lines = [];
         let row = [""];
@@ -392,7 +389,6 @@
         return lines;
     }
     
-    // TÁBLÁZAT BETÖLTÉSE
     async function betoltAdatbazis() {
         try {
             const response = await fetch(GOOGLE_SHEETS_CSV_URL);
@@ -424,7 +420,6 @@
         }
     }
     
-    // EGYESÍTETT INDÍTÁS
     window.onload = function() {
         betoltAdatbazis(); 
         frissitMindenSzamitast(); 
@@ -524,13 +519,17 @@
         return parseInt(document.getElementById('tizedes-valaszto').value);
     }
 
-    // Segédfüggvény a biztonságos számkonvertáláshoz (vesszőt pontra cseréli)
     function parseFlexibleFloat(id) {
         let val = document.getElementById(id).value;
         if (!val) return NaN;
         val = val.replace(',', '.');
         return parseFloat(val);
     }
+
+    // 
+
+[Image of the human digestive system]
+
 
     function frissitMindenSzamitast() {
         szamolNedvesség();
@@ -569,6 +568,11 @@
         const suruseg = m / v;
         eredmenyDiv.innerHTML = `Sűrűség (ρ): ${suruseg.toFixed(tizedes)} g/cm³`;
     }
+
+    // 
+
+[Image of hydrogen fuel cell]
+
 
     function szamolHajlitas() {
         const F = parseFlexibleFloat('hajl-f');
