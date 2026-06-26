@@ -184,7 +184,6 @@
             background: #3a3a3a;
         }
         .fafaj-item h3 { margin: 0 0 5px 0; color: var(--accent-color); }
-        .fafaj-latin { font-style: italic; color: var(--text-muted); font-size: 0.9rem; }
 
         .adatlap-spec {
             margin-top: 15px;
@@ -201,11 +200,6 @@
             color: var(--accent-color);
             display: inline-block;
             margin-bottom: 2px;
-        }
-        .adatlap-al-lista {
-            margin: 5px 0 5px 20px;
-            padding: 0;
-            list-style-type: square;
         }
 
         .back-bar { margin-bottom: 20px; }
@@ -289,7 +283,7 @@
                             <div id="fafaj-lista"></div>
                         </div>
 
-                        <div id="fafaj-adatlap-nezetház" style="display: none;">
+                        <div id="fafaj-adatlap-nezet" style="display: none;">
                             <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.9rem;" onclick="visszaAListahoz()">⬅ Vissza a listához</button>
                             <div id="adatlap-tartalom"></div>
                         </div>
@@ -314,11 +308,11 @@
                             <h3>💧 Nedvességtartalom Számítás</h3>
                             <div class="input-group">
                                 <label>Nedves fa tömege (m<sub>u</sub>) [g]:</label>
-                                <input type="text" id="mu" value="120.45">
+                                <input type="text" id="mu" value="120.45" oninput="szamolNedvesség()">
                             </div>
                             <div class="input-group">
                                 <label>Abszolút száraz fa tömege (m<sub>0</sub>) [g]:</label>
-                                <input type="text" id="m0" value="100.12">
+                                <input type="text" id="m0" value="100.12" oninput="szamolNedvesség()">
                             </div>
                             <button class="btn" onclick="szamolNedvesség()">Kiszámol</button>
                             <div id="nedv-eredmeny" class="result">Nettó: - | Bruttó: -</div>
@@ -328,11 +322,11 @@
                             <h3>📐 Sűrűség Számítás</h3>
                             <div class="input-group">
                                 <label>Próbatest tömege (m) [g]:</label>
-                                <input type="text" id="suru-m" value="45.231">
+                                <input type="text" id="suru-m" value="45.231" oninput="szamolSuruseg()">
                             </div>
                             <div class="input-group">
                                 <label>Próbatest térfogata (V) [cm³]:</label>
-                                <input type="text" id="suru-v" value="60.11">
+                                <input type="text" id="suru-v" value="60.11" oninput="szamolSuruseg()">
                             </div>
                             <button class="btn" onclick="szamolSuruseg()">Kiszámol</button>
                             <div id="suru-eredmeny" class="result">Sűrűség (ρ): -</div>
@@ -342,19 +336,19 @@
                             <h3>🪵 Hajlítószilárdság (σ<sub>h</sub>)</h3>
                             <div class="input-group">
                                 <label>Törőerő (F) [N]:</label>
-                                <input type="text" id="hajl-f" value="1500">
+                                <input type="text" id="hajl-f" value="1500" oninput="szamolHajlitas()">
                             </div>
                             <div class="input-group">
                                 <label>Támaszköz (L) [mm]:</label>
-                                <input type="text" id="hajl-l" value="240">
+                                <input type="text" id="hajl-l" value="240" oninput="szamolHajlitas()">
                             </div>
                             <div class="input-group">
                                 <label>Szélesség (b) [mm]:</label>
-                                <input type="text" id="hajl-b" value="20.1">
+                                <input type="text" id="hajl-b" value="20.1" oninput="szamolHajlitas()">
                             </div>
                             <div class="input-group">
                                 <label>Magasság (h) [mm]:</label>
-                                <input type="text" id="hajl-h" value="19.8">
+                                <input type="text" id="hajl-h" value="19.8" oninput="szamolHajlitas()">
                             </div>
                             <button class="btn" onclick="szamolHajlitas()">Kiszámol</button>
                             <div id="hajl-eredmeny" class="result">Hajlítószilárdság (σ<sub>h</sub>): -</div>
@@ -432,9 +426,9 @@
     
     // EGYESÍTETT INDÍTÁS
     window.onload = function() {
-    betoltAdatbazis(); // Ez letölti az adatokat és automatikusan kirajzolja a listát
-    frissitMindenSzamitast(); // Ez pedig alaphelyzetbe állítja a kalkulátorokat
-};
+        betoltAdatbazis(); 
+        frissitMindenSzamitast(); 
+    };
 
     function showPage(pageId) {
         document.querySelectorAll('.page').forEach(page => {
@@ -494,7 +488,8 @@
         }
 
         document.getElementById('fafaj-lista-container').style.display = 'none';
-        document.getElementById('fafaj-adatlap-nezetház').style.display = 'block';
+        document.getElementById('fafaj-kereso').style.display = 'none';
+        document.getElementById('fafaj-adatlap-nezet').style.display = 'block';
 
         const formazSzoveg = (szoveg) => szoveg ? szoveg.replace(/\n/g, '<br>') : "Adat nem elérhető";
 
@@ -522,11 +517,19 @@
     function visszaAListahoz() {
         document.getElementById('fafaj-lista-container').style.display = 'block';
         document.getElementById('fafaj-kereso').style.display = 'block';
-        document.getElementById('fafaj-adatlap-nezetház').style.display = 'none';
+        document.getElementById('fafaj-adatlap-nezet').style.display = 'none';
     }
 
     function getKerekites() {
         return parseInt(document.getElementById('tizedes-valaszto').value);
+    }
+
+    // Segédfüggvény a biztonságos számkonvertáláshoz (vesszőt pontra cseréli)
+    function parseFlexibleFloat(id) {
+        let val = document.getElementById(id).value;
+        if (!val) return NaN;
+        val = val.replace(',', '.');
+        return parseFloat(val);
     }
 
     function frissitMindenSzamitast() {
@@ -536,8 +539,8 @@
     }
 
     function szamolNedvesség() {
-        const mu = parseFloat(document.getElementById('mu').value);
-        const m0 = parseFloat(document.getElementById('m0').value);
+        const mu = parseFlexibleFloat('mu');
+        const m0 = parseFlexibleFloat('m0');
         const tizedes = getKerekites();
         const eredmenyDiv = document.getElementById('nedv-eredmeny');
 
@@ -553,8 +556,8 @@
     }
 
     function szamolSuruseg() {
-        const m = parseFloat(document.getElementById('suru-m').value);
-        const v = parseFloat(document.getElementById('suru-v').value);
+        const m = parseFlexibleFloat('suru-m');
+        const v = parseFlexibleFloat('suru-v');
         const tizedes = getKerekites();
         const eredmenyDiv = document.getElementById('suru-eredmeny');
 
@@ -568,10 +571,10 @@
     }
 
     function szamolHajlitas() {
-        const F = parseFloat(document.getElementById('hajl-f').value);
-        const L = parseFloat(document.getElementById('hajl-l').value);
-        const b = parseFloat(document.getElementById('hajl-b').value);
-        const h = parseFloat(document.getElementById('hajl-h').value);
+        const F = parseFlexibleFloat('hajl-f');
+        const L = parseFlexibleFloat('hajl-l');
+        const b = parseFlexibleFloat('hajl-b');
+        const h = parseFlexibleFloat('hajl-h');
         const tizedes = getKerekites();
         const eredmenyDiv = document.getElementById('hajl-eredmeny');
 
